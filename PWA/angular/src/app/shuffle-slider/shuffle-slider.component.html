@@ -1,0 +1,73 @@
+<ng-container *ngIf="shuffleCharts">
+  <div class="clearfix"></div>
+  <div class="space_40"></div>
+  <!--Subheader - WEB starts-->
+  <div class="home_heading"><h1>{{heading}}</h1></div>
+  <div class="home_subheading"><h2>{{subHeading}}</h2></div>
+  <div class="more_btn_wrap">
+    <div class="more_btn" *ngIf="showMore">
+      <a href="javascript:void(0);"
+        (click)="commonService.goToURL('/moreshuffle')">{{'pwa.more.button.text' | customTranslate}}</a>
+    </div>
+  </div>
+  <!--Subheader - WEB ends-->
+  <div class="clearfix"></div>
+  <div class="space_30"></div>
+  <div class="slider_content_trending">
+
+    <!-- start Basic Jquery Slider -->
+    <div id="sliderContainer4"
+      style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:220px;overflow:hidden;visibility:hidden;">
+      <div data-u="slides" id="slides_sliderContainer4"
+        style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:220px;overflow:hidden;">
+        <div *ngFor="let shuffle of shuffleCharts;trackBy:commonService.trackById; let i=index; let isLast=last"
+          appCustomJssor isLast={{isLast}} sliderId="4">
+          <div class="home_small_banner" id="sliderContainer4_{{i}}">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="text-align:left;">
+                  <div class="album_wrap">
+                    <div class="album_placeholder_shuffle one_open"
+                      (click)="openShufflePopup(shuffle.id, shuffle.type, shuffle)">
+                      <app-custom-image-loader [actualImgSrc]="shuffle.primary_image"
+                        [defaultImgSrc]="shufflesSliderImageDefault" [loadImgSrc]="shufflesSliderImageLoading"
+                        [showImage]="imageItemsMap.get(i)" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                    </div>
+                    <div class="album_placeholder_shuffle_bg">
+                      <img src="image/shuffle_bg.png" width="183" height="183"
+                        alt="{{'pwa.image.alt.text' | customTranslate}}" />
+                    </div>
+                    <div class="space_155"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td *ngIf="!isArabic" class="big_16_black1" style="font-weight:normal; padding-left: 20px;">
+                  {{shuffle | customEllipse : shuffle.type : trackNameSize}}
+                </td>
+                <td *ngIf="isArabic" class="big_16_black1" style="font-weight:normal; padding-right:35px;">
+                  {{shuffle | customEllipse : shuffle.type : trackNameSize}}
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black" style="vertical-align:top; padding-top:0px; padding-left: 20px;">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Jssor Slider End -->
+      <!-- Bullet Navigator -->
+      <div data-u="navigator" id="sliderContainer4_navigator" class="jssorBulletNavigator4"
+        style="position:absolute;bottom:0px;right:12px;" data-autocenter="1" data-scale="0.1" data-scale-bottom="0.55">
+        <div data-u="prototype" class="i" style="width:14px;height:14px;" [innerHTML]="svgBulletHTML | sanitizeHtml">
+        </div>
+      </div>
+      <!-- end Basic jQuery Slider -->
+    </div>
+    <!--Shuffle Container - WEB Ends-->
+  </div>
+</ng-container>

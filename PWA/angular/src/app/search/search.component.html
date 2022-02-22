@@ -1,0 +1,141 @@
+<div class="space_80"></div>
+
+<ng-container *ngIf=!isEmptyResult>
+  <!--Trending wrap starts-->
+  <div class="trending_wrap" id="trending_wrap_1">
+    <ng-container *ngIf="showRTToggle">
+      <div class="float_btn">
+        <app-rt-slider [default]="selectedContent" [isFromSearchResults]="true">
+        </app-rt-slider>
+      </div>
+      <div class="clear"></div>
+      <div class="space_20"></div>
+    </ng-container>
+
+    <ng-container *ngFor="let searchResultItem of searchResults">
+      <ng-container *ngIf="searchResultItem && searchResultItem.resultItems">
+        <div class="inside_heading">{{searchResultItem.headingText  | customTranslate}}</div>
+        <div class="more_btn_wrap_inside">
+          <div class="more_btn" *ngIf="searchResultItem.resultItems.total_item_count > searchResultItem.maxItem">
+            <a href="javascript:void(0);"
+              (click)="getMoreButtonLink(searchResultItem.genre)">{{'pwa.more.button.text' | customTranslate}}</a>
+          </div>
+        </div>
+
+        <div class="space_5"></div>
+        <div class="store_home_container" id="store_home_container_search">
+          <ul class="album_ContentBlock_List1">
+            <ng-container
+              *ngFor="let resultItem of searchResultItem.resultItems.items | slice:0:searchResultItem.maxItem; trackBy:commonService.trackById; let i=index;">
+              <li class="album_ContentBlock_List1">
+                <div class="home_small_banner" id="home_small_banner_{{i}}">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td [attr.colspan]="showSetBtn || showGetBtn ? 2 : 0" style="text-align:left;">
+                        <div class="album_wrap">
+                          <div class="add_icon" *ngIf="searchResultItem.genre != 'trending'">
+                            <div *ngIf="!isRTContent" id="{{resultItem.preview_stream_url}}" class="play1a"
+                              (click)="commonService.toggleAudioControls(isRTContent, 'play1b', 'Search by ' + searchResultItem.genre, resultItem);">
+                            </div>
+                            <div *ngIf="isRTContent" id="{{resultItem.realtone?.made_reference_id}}" class="play1a"
+                              (click)="commonService.toggleAudioControls(isRTContent, 'play1b', 'Search by ' + searchResultItem.genre, resultItem);">
+                            </div>
+                          </div>
+                          <div class="album_placeholder">
+                            <div *ngIf="searchResultItem.genre != 'trending'"
+                              (click)="commonService.goToContentPage(searchResultItem.resultItems.items, i, searchResultItem.resultItems.items.length, 'Search by ' + searchResultItem.genre, isRTContent)">
+                              <app-custom-image-loader [actualImgSrc]="resultItem.primary_image" [isBannerImage]="false"
+                                [defaultImgSrc]="searchImageDefault" [loadImgSrc]="searchImageLoading">
+                              </app-custom-image-loader>
+                            </div>
+                            <div *ngIf="searchResultItem.genre == 'trending'"
+                              (click)="redirectToCategoryURL(resultItem.chartId)">
+                              <app-custom-image-loader [actualImgSrc]="resultItem.primary_image" [isBannerImage]="false"
+                                [defaultImgSrc]="searchImageDefault" [loadImgSrc]="searchImageLoading">
+                              </app-custom-image-loader>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="big_16_black1 ellipse" style="font-weight:normal;">
+                        {{resultItem| customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+                      </td>
+                      <td *ngIf="showSetBtn && !isRTContent" width="28%" rowspan="2" style="font-weight:normal;">
+                        <a href="javascript:void(0);" class="one_open">
+                          <div class="fill_btn1_smallest"
+                            (click)="commonService.initiateLoginOrAction(resultItem, 'Search by ' + searchResultItem.genre, false, null, true)">
+                            {{'pwa.content.set.button.text' | customTranslate}}
+                          </div>
+                        </a>
+                      </td>
+                      <td *ngIf="showGetBtn && isRTContent" width="28%" rowspan="2" style="font-weight:normal;">
+                        <a href="javascript:void(0);" class="one_open">
+                          <div class="fill_btn1_smallest"
+                            (click)="commonService.initiateLoginOrAction(resultItem, 'Search by ' + searchResultItem.genre, true, null, true)">
+                            {{'pwa.rt.content.get.button.text' | customTranslate}}
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="big_16_black ellipse" tyle="vertical-align:top; padding-top:0px">
+                        {{resultItem | customEllipse : resultItem.type : trackNameSize}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+          <div class="clearfix"></div>
+          <div class="space_20"></div>
+        </div>
+        <div class="space_30"></div>
+
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf=isEmptyResult>
+  <div class="trending_wrap">
+    <ng-container *ngIf="showRTToggle">
+      <div class="float_btn">
+        <app-rt-slider [default]="selectedContent" [isFromSearchResults]="true">
+        </app-rt-slider>
+      </div>
+      <div class="clear"></div>
+      <div class="space_20"></div>
+    </ng-container>
+    <div class="space_80"></div>
+    <div class="search_no_img">
+      <img src="image/search_binocular.svg" alt="{{'pwa.image.alt.text' | customTranslate}}" />
+    </div>
+    <div class="oops_text">{{emptySearchDescription}}</div>
+    <div class="space_60"></div>
+
+    <div *ngIf="searchTagsResult && searchTagsResult.length > 0">
+      <div class="inside_heading">{{searchTagsHeading}}</div>
+      <div class="more_btn_wrap_inside"></div>
+
+      <div class="search_selection_menu_wrap">
+        <div class="search_select_main_menu">
+          <ng-container *ngFor="let tag of searchTagsResult">
+            <a href="javascript:void(0);" (click)="redirectToCategoryURL(tag.chartId)">
+              <div class="outline_btn_red">{{tag.tagName}}</div>
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+</ng-container>
+
+<div class="clearfix"></div>
+<div class="space_5"></div>
+<div class="clearfix"></div>
+<!--Container Ends-->

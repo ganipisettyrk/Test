@@ -1,0 +1,57 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td height="10" class="" style="text-align:center;">
+                <div class="done_page_heading">{{heading}}</div>
+                <div class="pop_album_wrap">
+                    <div class="space_100"></div>
+                    <div class="pop_thankyou_txt">
+                        {{popupSubHeading}}
+                    </div>
+                    <div class="pop_small_txt">
+                        {{popupDesc}}
+                    </div>
+                    <div class="space_40"></div>
+                    <div class="pop_confirm_btn" *ngIf="!deleteError">
+                        <a href="javascript:void(0);" class="one_close" (click)="popupService.closePopup()" style="display: inline;">
+                            <div class="fill_btn1_grey">
+                                {{cancelBtnText}}
+                            </div>
+                        </a>
+                        &nbsp;&nbsp;
+                        <ng-container *ngIf="type == 'delete_selection'">
+                            <a href="javascript:void(0);" class="one_close" (click)="confirmDeleteSelection()" style="display: inline;">
+                                <div class="fill_btn1">
+                                    {{continueBtnText}}
+                                </div>
+                            </a>
+                        </ng-container>
+                        <ng-container *ngIf="type == 'delete_download'">
+                            <a href="javascript:void(0);" class="one_close" (click)="confirmDeleteDownload()" style="display: inline;">
+                                <div class="fill_btn1">
+                                    {{continueBtnText}}
+                                </div>
+                            </a>
+                        </ng-container>
+                    </div>
+                    <div class="pop_confirm_btn" *ngIf="deleteError">
+                        <a href="javascript:void(0);" class="one_close" (click)="popupService.closePopup()" style="display: inline;">
+                            <div class="fill_btn1">
+                                {{closeBtnText}}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="space_40"></div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+            </td>
+        </tr>
+        <tr>
+            <td align="left"></td>
+        </tr>
+    </tbody>
+</table>

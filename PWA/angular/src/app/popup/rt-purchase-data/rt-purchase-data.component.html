@@ -1,0 +1,87 @@
+<ng-container *ngIf="!isDataReady">
+  <div class="space_40"></div>
+  <div class="loading_content_wrap">
+    <img src="image/loading_content.gif" width="32" height="32"
+      alt="{{'pwa.loading.image.alt.text' | customTranslate}}" />
+  </div>
+</ng-container>
+
+<!-- This will be shown for purchase error/failure/success cases-->
+<ng-container *ngIf="isDataReady && showRTPurchaseResp">
+  <div class="space_40"></div>
+  <div class="pop_thankyou_txt">{{purchaseRespHeading}}</div>
+  <div class="pop_small_txt">{{purchaseRespDesc}}</div>
+  <div class="space_40"></div>
+  <ng-container *ngIf="!showCrossSellOption">
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+        <div class="fill_btn1">{{purchaseRespPopupBtnTxt}}</div>
+      </a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showCrossSellOption">
+    <div class="pop_small_txt">
+      <strong class="subscription_confirm">{{'pwa.rt.set.callertune.text'| customTranslate}}</strong>
+    </div>
+    <div class="space_20"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="purchaseService.openPurchasePopup(contentMetadata, 'ringback');">
+        <div class="fill_btn1">{{purchaseRespPopupBtnTxt}}</div>
+      </a>
+    </div>
+  </ng-container>
+  <div class="space_40"></div>
+  <!-- If success, we need to show cross sell option-->
+</ng-container>
+
+<ng-container *ngIf='isDataReady && !showRTPurchaseResp'>
+  <ng-container *ngIf="showMultipleSubscriptions && allowedSubscriptions">
+    <div class="subscription_heading">{{'pwa.purchase.choose.plan.text' | customTranslate}}</div>
+    <div class="space_10"></div>
+    <div class="subscription_form_wrap1">
+      <div style="width: 100%; overflow-x: auto; overflow-y:hidden;">
+        <ul [style.width]="sliderWidth" class="SubscribeBlock_List1">
+          <li class="SubscribeBlock_List1" *ngFor="let subscription of allowedSubscriptions;let i=index;">
+            <div [ngClass]="selectedValue[i] ?  'subscription_wrap select' : 'subscription_wrap'">
+              <div class="subscription_checkbox_wrap" (click)="onRadioChange(i)">
+                <input name='subscriptionId{{i}}' value="{{subscription.catalog_subscription_id}}" type='radio'
+                  class='css-checkbox' id='checkboxG5{{i}}' [checked]="selectedValue[i]" />
+                <label for='checkboxG5' class='css-label'></label>
+              </div>
+              <div class="clearfix"></div>
+              <div class="space_10"></div>
+              <div class="pack_name">{{purchaseService.getPurchasePlanText(subscription)}}</div>
+              <div class="space_5"></div>
+              <div class="pack_description">
+                {{purchaseService.getNewUserPriceDescription(priceDescFieldNewUser,subscription)}} </div>
+              <div class="clearfix"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!showMultipleSubscriptions && allowedSubscriptions">
+    <div class="space_10"></div>
+    <div class="pop_small_txt">
+      {{purchaseService.getNewUserPriceDescription(priceDescFieldNewUser,allowedSubscriptions[0])}}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="showExistingUserPrice">
+    <div class="space_10"></div>
+    <div class="pop_small_txt">
+      {{existingUserPrice}}
+    </div>
+  </ng-container>
+
+  <div class="space_10"></div>
+  <div class="subscription_confirm">{{'pwa.rt.download.msg' | customTranslate}}</div>
+  <div class="space_40"></div>
+  <div class="pop_confirm_btn">
+    <a href="javascript:void(0);" (click)="purchaseRTContent()" class="">
+      <div class="fill_btn1">{{'pwa.rt.download.confirm.button.txt' | customTranslate}}</div>
+    </a>
+  </div>
+  <div class="space_20"></div>
+</ng-container>

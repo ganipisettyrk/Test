@@ -1,0 +1,64 @@
+.jssor-loading-tail-spin img {
+    animation-name: jssor-loading-tail-spin;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+    
+@keyframes jssor-loading-tail-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    
+    to {
+        transform: rotate(360deg);
+    }
+}
+    
+.jssorArrow1 {display:block;position:absolute;cursor:pointer;}
+.jssorArrow1 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
+.jssorArrow1:hover {opacity:.8;}
+.jssorArrow1.jssora051dn {opacity:.5;}
+.jssorArrow1.jssora051ds {opacity:.3;pointer-events:none;}
+  
+.jssorBulletNavigator1 {position:absolute;}
+.jssorBulletNavigator1 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator1 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;  transform: scale(0.80);}
+.jssorBulletNavigator1 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator1 .iav .b {fill:#e60000;stroke:#e60000;stroke-opacity:.7;stroke-width:1200;}
+.jssorBulletNavigator1 .i.idn {opacity:.3;}
+    
+.jssorBulletNavigator2 {position:absolute;}
+.jssorBulletNavigator2 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator2 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.jssorBulletNavigator2 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator2 .iav .b {fill:#e60000;stroke:#e60000;stroke-opacity:.7;stroke-width:2000;}
+.jssorBulletNavigator2 .i.idn {opacity:.3;}
+    
+.jssorBulletNavigator3 {position:absolute;}
+.jssorBulletNavigator3 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator3 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.jssorBulletNavigator3 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator3 .iav .b {fill:#e60000;stroke:#e60000;stroke-opacity:.7;stroke-width:2000;}
+.jssorBulletNavigator3 .i.idn {opacity:.3;}
+     
+.jssorBulletNavigator4 {position:absolute;}
+.jssorBulletNavigator4 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator4 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.jssorBulletNavigator4 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator4 .iav .b {fill:#e60000;stroke:#e60000;stroke-opacity:.7;stroke-width:2000;}
+.jssorBulletNavigator4 .i.idn {opacity:.3;}
+
+.jssorBulletNavigator5 {position:absolute;}
+.jssorBulletNavigator5 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator5 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.jssorBulletNavigator5 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator5 .iav .b {fill:#ff0055;stroke:#e2054f;stroke-opacity:.7;stroke-width:2000;}
+.jssorBulletNavigator5 .i.idn {opacity:.3;}
+    
+.jssorBulletNavigator8 {position:absolute;}
+.jssorBulletNavigator8 .i {position:absolute;cursor:pointer;}
+.jssorBulletNavigator8 .i .b {fill:#ccc;stroke:#ccc;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.jssorBulletNavigator8 .i:hover .b {fill-opacity:.7;}
+.jssorBulletNavigator8 .iav .b {fill:#e60000;stroke:#e60000;stroke-opacity:.7;stroke-width:2000;}
+.jssorBulletNavigator8 .i.idn {opacity:.3;}

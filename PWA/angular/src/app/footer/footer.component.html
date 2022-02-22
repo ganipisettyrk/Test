@@ -1,0 +1,62 @@
+<ng-container *ngIf="isInitialLoadingCompleted && showFooter">
+    <div class=" space_30"> </div>
+    <div class="footer_text" id="footer_text_1">{{'pwa.footer.poweredby.text' | customTranslate}}</div>
+    <!--Footer - WEB starts-->
+    <div class="footer_logo" id="footer_logo_1">
+        <a href="javascript:void(0)" (click)="commonService.goToURL(footerLogoUrl);">
+            <img src="{{'pwa.footer.logo.image.path' | customTranslate}}" width="700" height="112"
+                alt="{{'pwa.footer.logo.image.alt.text'  | customTranslate}}" />
+        </a>
+    </div>
+    <!--Footer - WEB ends-->
+    <div class="playstore_wrap">
+        <ng-container *ngIf="showIosAppIcon">
+            <a href="{{appstoreLink}}" style="display: inline-block;"
+                title="{{'pwa.footer.appstore.image.title.text' | customTranslate}}">
+                <img src="image/ic_appstore.png" width="646" height="250"
+                    alt="{{'pwa.footer.appstore.image.alt.text' | customTranslate}}">
+            </a>
+        </ng-container>
+        <ng-container *ngIf="showAndroidAppIcon">
+            <a href="{{playstoreLink}}" style="display: inline-block;"
+                title="{{'pwa.footer.playstore.image.title.text' | customTranslate}}">
+                <img src="image/ic_playstore.png" width="646" height="250"
+                    alt="{{'pwa.footer.playstore.image.alt.text' | customTranslate}}">
+            </a>
+        </ng-container>
+    </div>
+    <div style="text-align: center;">
+        <ng-container *ngIf="showIosAppIcon">
+            <div class="star-ratings-sprite" style="display: inline-block; margin-left: 5px;">
+                <span [style.width]="appStoreRating" class="star-ratings-sprite-rating"></span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="showAndroidAppIcon">
+            <div class="star-ratings-sprite margin_left_star" style="display: inline-block;">
+                <span [style.width]="playstoreRating" class="star-ratings-sprite-rating"></span>
+            </div>
+        </ng-container>
+    </div>
+    <div class="space_70"></div>
+</ng-container>
+<ng-container *ngIf="enableGDPRPermission">
+    <div class="dropdownwrap3" style="display: block;">
+        <div class="dropdownwrap3_close">
+            <a href="javascript:void(0)" (click)="commonService.updateGDPRResposne(false);" id="toaster_ic">
+                <img src="image/close_toaster.png" width="100" height="100"
+                    alt="{{'pwa.close.image.alt.text' | customTranslate}}" />
+            </a>
+        </div>
+        <div [innerHTML]="'pwa.gdpr.permission.text' | customTranslate | sanitizeHtml">
+        </div>
+        <div class="clearfix"></div>
+        <div class="space_10"></div>
+        <div class="btn_wrap">
+            <a href="javascript:void(0)" (click)="commonService.updateGDPRResposne(true);">
+                <div class="fill_btn2"> {{'pwa.gdpr.accept.button.text' | customTranslate}} </div>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="space_20"></div>
+    </div>
+</ng-container>

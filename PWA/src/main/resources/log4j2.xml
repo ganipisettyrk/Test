@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd}-%i</Property>
+        <Property name="LOG_BASE_PATH">/opt/log</Property>
+		<Property name="LOG_MAX_SIZE">20MB</Property>
+		<Property name="LOG_MAX_BACKUP">50</Property>
+		<Property name="LOG_FILE_NAME">pwa</Property>		
+		<Property name="OOREDO_CDRLOG_FILE_NAME">ooredoLog</Property>
+		<Property name="OOREDO_LOG_FILE_Header">TIMESTAMP,TOKEN,MSISDN,CORRELATORID,SOURCE_IP,USER_AGENT</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%highlight{%d %5p [%t] (%F:%M():%L)}{FATAL=bg_red,
+					ERROR=red, WARN=yellow, INFO=green} - %m%n" />
+        </Console>
+ 
+        <RollingRandomAccessFile name="applicationLog"
+            fileName="${LOG_BASE_PATH}/${LOG_FILE_NAME}.log"
+            filePattern="${LOG_BASE_PATH}/${LOG_FILE_NAME}-${LOG_PATTERN}.log">
+            <PatternLayout> <pattern>%d %5p [%t] (%F:%M():%L) - %m%n</pattern></PatternLayout>
+            <Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_SIZE}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${LOG_MAX_BACKUP}" />
+        </RollingRandomAccessFile>
+		
+		 <RollingFile name="ooredoLog" 
+            fileName="${LOG_BASE_PATH}/${OOREDO_CDRLOG_FILE_NAME}.csv"
+            filePattern="${LOG_BASE_PATH}/${OOREDO_CDRLOG_FILE_NAME}-${LOG_PATTERN}.csv">
+            <CsvParameterLayout delimiter="," header="${OOREDO_LOG_FILE_Header}\n"/>
+            <Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_SIZE}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${LOG_MAX_BACKUP}" />
+        </RollingFile>
+ 
+    </Appenders>
+    <Loggers>
+ 
+        <Logger name="com.onmobile.rbt.pwa" additivity="false" level="debug" includeLocation="true">
+            <AppenderRef ref="applicationLog" />
+            <AppenderRef ref="Console" />
+        </Logger>
+		
+		<Logger name="com.onmobile.rbt.pwa.utils.OoredoOmanLogger" additivity="false" level="debug" includeLocation="true">
+            <AppenderRef ref="ooredoLog" />
+        </Logger>
+ 
+        <Root level="debug">
+			<AppenderRef ref="applicationLog" />
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

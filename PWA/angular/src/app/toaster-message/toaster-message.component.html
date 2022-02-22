@@ -1,0 +1,9 @@
+<div *ngIf="showMessage" class="toaster_wrap">
+  <div class="toaster_msg_wrap">
+    <div class="icon_space">
+      <img src="image/error_ic.svg" *ngIf="type == 'error'" alt="{{'pwa.image.alt.text' | customTranslate}}">
+      <img src="image/warning_ic.svg" *ngIf="type == 'warning'" alt="{{'pwa.image.alt.text' | customTranslate}}">
+    </div>
+    <div class="msg_space">{{message}}</div>
+  </div>
+</div>

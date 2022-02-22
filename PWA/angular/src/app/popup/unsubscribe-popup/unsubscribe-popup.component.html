@@ -1,0 +1,55 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="10" class="" style="text-align:center;">
+            <div class="done_page_heading" *ngIf="isMobile">{{heading}}</div>
+            <ng-container *ngIf="!showUnsubscribeResp">
+                <div class="pop_album_wrap">
+                    <div class="clear"></div>
+                    <div class="space_40"></div>
+                    <div class="pop_thankyou_txt">{{'pwa.unsubscribe.popup.subheading' | customTranslate}}</div>
+                    <div class="space_20"></div>
+                    <div class="pop_small_txt_16">{{'pwa.unsubscribe.popup.description' | customTranslate}}</div>
+                    <div class="space_40"></div>
+                    <div class="pop_confirm_btn">
+                        <a href="javascript:void(0);" (click)="popupService.closePopup();">
+                            <div class="fill_btn1_grey">{{'pwa.unsubscribe.popup.cancel.button.text' | customTranslate}}
+                            </div>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:void(0);" (click)="unsubscribeService();">
+                            <div class="fill_btn1">{{'pwa.unsubscribe.popup.confirm.button.text' | customTranslate}}</div>
+                        </a>
+                    </div>
+                    <div class="space_40"></div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="showUnsubscribeResp">
+                <div class="pop_album_wrap">
+                    <div class="clear"></div>
+                    <div class="space_40"></div>
+                    <div class="pop_thankyou_txt">{{subheading}}</div>
+                    <div class="space_20"></div>
+                    <div class="pop_small_txt_16">{{unsubscribeResponse}}</div>
+                    <div class="space_40"></div>
+                    <div class="pop_confirm_btn">
+                        <a href="javascript:void(0);" (click)="popupService.closePopup();">
+                            <div class="fill_btn1">
+                                {{'pwa.unsubscribe.response.ok.button.text' | customTranslate}}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="space_40"></div>
+                </div>
+            </ng-container>
+        </td>
+    </tr>
+
+    <tr *ngIf="!isMobile">
+      <td align="left">
+      </td>
+    </tr>
+    <tr *ngIf="!isMobile">
+      <td align="left"></td>
+    </tr>
+  </table>
+

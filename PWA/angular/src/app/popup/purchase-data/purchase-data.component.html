@@ -1,0 +1,300 @@
+<ng-container *ngIf="!popupDataReady">
+  <div class="space_40"></div>
+  <div class="loading_content_wrap">
+    <img src="image/loading_content.gif" width="32" height="32"
+      alt="{{'pwa.loading.image.alt.text' | customTranslate}}" />
+  </div>
+</ng-container>
+
+<ng-container *ngIf='showPurchaseError'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt"></div>
+    <div class="pop_small_txt">{{errorMessage}}</div>
+    <div class="space_40"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="goToUrl()">
+        <div class="fill_btn1">
+          {{'pwa.purchase.go.to.home.button.text' | customTranslate}}</div>
+      </a>
+    </div>
+    <div class="space_40"></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="popupDataReady && isNewUser &&  !isPurchaseError
+    && !isPurchaseSuccess && !showDoubleConfirmationPopup && !showUpgradePopup && !showProfileOptions 
+    && !showPurchaseError && !showConsentResponse && !showPaytmResponse">
+
+  <ng-container *ngIf="showMultipleSubscriptions && allowedSubscriptions">
+    <div class="subscription_heading">{{'pwa.purchase.choose.plan.text' | customTranslate}}</div>
+    <div class="space_10"></div>
+    <div class="subscription_form_wrap1">
+      <div style="width: 100%; overflow-x: auto; overflow-y:hidden;">
+        <ul [style.width]="sliderWidth" class="SubscribeBlock_List1">
+          <li class="SubscribeBlock_List1" *ngFor="let subscription of allowedSubscriptions;let i=index;">
+            <div [ngClass]="selectedValue[i] ?  'subscription_wrap select' : 'subscription_wrap'">
+              <div class="subscription_checkbox_wrap" (click)="onRadioChange(i)">
+                <input name='subscriptionId{{i}}' value="{{subscription.catalog_subscription_id}}" type='radio'
+                  class='css-checkbox' id='checkboxG5{{i}}' [checked]="selectedValue[i]" />
+                <label for='checkboxG5' class='css-label'></label>
+              </div>
+              <div class="clearfix"></div>
+              <div class="space_10"></div>
+              <div class="pack_name">{{purchaseService.getPurchasePlanText(subscription)}}</div>
+              <div class="space_5"></div>
+              <div class="pack_description">
+                {{purchaseService.getNewUserPriceDescription(priceDescFieldNewUser, subscription)}} </div>
+              <div class="clearfix"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!showMultipleSubscriptions">
+    <div class="space_10"></div>
+    <div class="pop_small_txt" *ngIf="allowedSubscriptions">
+      {{purchaseService.getNewUserPriceDescription(priceDescFieldNewUser, allowedSubscriptions[0])}}
+    </div>
+    <div class="pop_small_txt" *ngIf="!allowedSubscriptions">
+      {{newUserPriceDesc}}
+    </div>
+    <div class="subscription_confirm">{{'pwa.purchase.popup.only.allcaller.option.text' | customTranslate}}</div>
+    <div class="space_30"></div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="popupDataReady && !isNewUser && !isPurchaseError && !isPurchaseSuccess 
+  && !showDoubleConfirmationPopup && !showUpgradePopup && !showProfileOptions && !showPurchaseError 
+  && !showConsentResponse && !showPaytmResponse">
+
+  <ng-container *ngIf="showSpecialCallerOption && !isAzaan">
+    <div class="subscription_confirm">{{'pwa.multi.options.set.for.text' | customTranslate}}</div>
+    <div class="space_20"></div>
+    <div class="set_name_wrap">
+      <div class="set_name">{{'pwa.multi.options.allcaller.text' | customTranslate}}</div>
+      <div class="set_toggle">
+        <div class="can-toggle demo-rebrand-2 red" id="allCaller"
+          style="margin-top: -25px; display: inline-block; position: absolute;">
+          <input id="f" type="checkbox" checked (click)="disableAllCaller()">
+          <label for="f">
+            <div class="can-toggle__switch red" data-checked="&nbsp;" data-unchecked="&nbsp;"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="space_10"></div>
+    <div class="set_name_wrap">
+      <div class="set_name">{{'pwa.multi.options.splcaller.text' | customTranslate}}</div>
+      <div class="set_toggle">
+        <div class="can-toggle demo-rebrand-2 red disable" id="splCaller"
+          style="margin-top: -25px; display: inline-block; position: absolute;">
+          <input id="h" type="checkbox" (click)="disableSplCaller()">
+          <label for="h">
+            <div class="can-toggle__switch red" data-checked="&nbsp;" data-unchecked="&nbsp;"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="set_name_wrap">
+      <div class="set_name" style="width: 100%;">
+        <input type="tel" class="register_txt" [attr.disabled]="allCallerChecked ? 'disabled' : null"
+          maxlength="{{'pwa.msisdn.max.length' | customTranslate}}" appNumberOnly autocomplete="off"
+          [(ngModel)]="splCaller" placeholder="" value="" style="width: 100%; float: left;" />
+        <div *ngIf="showSplCallerError">
+          <div class="error_message">{{'pwa.error.invalid.special.caller' | customTranslate}}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!showSpecialCallerOption || isAzaan">
+    <div class="clearfix"></div>
+    <div class="space_20"></div>
+    <div class="subscription_confirm">{{'pwa.purchase.popup.only.allcaller.option.text' | customTranslate}}</div>
+    <div class="space_30"></div>
+  </ng-container>
+
+  <div class="clear"></div>
+  <div class="space_0"></div>
+  <div class="space_10"></div>
+  <div class="pop_small_txt" *ngIf="!isSetForNone">{{existingUserPrice}}</div>
+  <div class="space_20"></div>
+
+</ng-container>
+
+<ng-container *ngIf="popupDataReady && showProfileOptions && !isPurchaseError && !isPurchaseSuccess 
+  && !showDoubleConfirmationPopup && !showUpgradePopup && !showPurchaseError && !showConsentResponse
+  && !showPaytmResponse">
+
+  <app-profile-popup-data [data]="contentMetadata" (profileTimeSelected)="updateProfileDurationSelected($event)">
+  </app-profile-popup-data>
+
+</ng-container>
+
+<ng-container *ngIf="popupDataReady && !isPurchaseError && !isPurchaseSuccess && !showConsentResponse 
+  && !showPaytmResponse && !showPurchaseError">
+
+  <ng-container *ngIf="!showUpgradePopup && !showDoubleConfirmationPopup">
+    <div class="small_txt_pop" style="text-align: center" *ngIf='showTNCBoxForPurchase'>
+      <input name="checkboxG5" type="checkbox" [attr.checked]="isTnCAutoCheckEnabled ? 'checked' : null"
+        class="css-checkbox" id="checkboxG5" (click)="updateTncCheckedValue()">
+      <label for="checkboxG5" class="css-label1"></label>
+      <span [innerHTML]="'pwa.accept.tnc.text' | customTranslate | sanitizeHtml"></span>
+      <div class="space_20"></div>
+    </div>
+
+    <div *ngIf="showMultipleSubscriptions && allowedSubscriptions">
+      <div class="space_20"></div>
+    </div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="purchaseContent(false, false)" class="">
+        <div class="fill_btn1">{{'pwa.purchase.set.button.text' | customTranslate}}</div>
+      </a>
+    </div>
+    <div *ngIf="showAcceptTncError">
+      <div class="space_10"></div>
+      <div class="error_message">{{'pwa.accept.tnc.error.text' | customTranslate}}</div>
+    </div>
+    <div class="space_20"></div>
+  </ng-container>
+
+  <ng-container *ngIf="showUpgradePopup">
+    <div class="pop_album_wrap">
+      <app-upgrade-popup-data [data]="contentMetadata" [isNewUser]="isNewUser"
+        (catlogSubsId)="updateCatalogSubsId($event)"></app-upgrade-popup-data>
+      <div class="space_40"></div>
+      <div class="pop_confirm_btn">
+        <a class="" (click)="popupService.closePopup();">
+          <div class="fill_btn1_grey">{{'pwa.purchase.upgrade.popup.cancel.button.text' | customTranslate}}</div>
+        </a>
+        &nbsp;&nbsp;
+        <a class="" (click)="purchaseContent(true, false);">
+          <div class="fill_btn1">{{'pwa.purchase.upgrade.popup.continue.button.text' | customTranslate}}</div>
+        </a>
+      </div>
+      <div class="space_40"></div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="showDoubleConfirmationPopup">
+    <div class="pop_album_wrap">
+      <div class="space_100"></div>
+      <div class="pop_thankyou_txt"></div>
+      <div class="pop_small_txt">{{doubleConfirmationPopupData}}</div>
+      <div class="space_20"></div>
+      <div class="space_40"></div>
+      <div class="pop_confirm_btn">
+        <a (click)="popupService.closePopup();" style="display: inline;">
+          <div class="fill_btn1_grey">{{'pwa.purchase.double.confirmation.cancel.btn.text' | customTranslate}}</div>
+        </a>
+        &nbsp;&nbsp;
+        <a (click)="purchaseContent(true, true);" style="display: inline;">
+          <div class="fill_btn1">{{'pwa.purchase.double.confirmation.confirm.btn.text' | customTranslate}}</div>
+        </a>
+      </div>
+      <div class="space_40"></div>
+    </div>
+  </ng-container>
+</ng-container>
+
+
+<ng-container *ngIf='isNewUser && !purchaseDataAvailable'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt">{{'pwa.purchase.failure.popup.sorry.text' | customTranslate}}</div>
+    <div class="pop_small_txt">{{'pwa.purchase.failure.popup.msg' | customTranslate}}</div>
+    <div class="space_40"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+        <div class="fill_btn1">{{'pwa.purchase.failure.popup.button.text' | customTranslate}}</div>
+      </a>
+    </div>
+    <div class="space_40"></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf='isPurchaseError'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt">{{'pwa.purchase.failure.heading' | customTranslate}}</div>
+    <div class="pop_small_txt">{{purchaseErrorDesc}}</div>
+    <div class="space_40"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+        <div class="fill_btn1">{{'pwa.purchase.failure.popup.button.text' | customTranslate}}</div>
+      </a>
+    </div>
+    <div class="space_40"></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf='isPurchaseSuccess'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt">{{'pwa.purchase.success.popup.congrats.text' | customTranslate}}</div>
+    <div class="pop_small_txt">{{purchaseSuccessMsg}}</div>
+    <div class="space_40"></div>
+    <ng-container *ngIf="!showCrossSellOption">
+      <div class="pop_confirm_btn">
+        <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+          <div class="fill_btn1">{{'pwa.purchase.success.popup.button.text' | customTranslate}}</div>
+        </a>
+      </div>
+      <div class="space_40"></div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="showCrossSellOption">
+    <div class="pop_small_txt">
+      <strong class="subscription_confirm">{{'pwa.rt.set.ringtone.text' | customTranslate}}</strong>
+    </div>
+    <div class="space_20"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="purchaseService.openPurchasePopup(contentMetadata, 'realtone');">
+        <div class="fill_btn1">{{'pwa.set.ringtone.btn.text' | customTranslate}}</div>
+      </a>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf='isContestRedirectRequired'>
+    <div class="space_40"></div>
+    <div class="contest_banner">
+      <a href="javascript:void(0);" (click)="goToContestPage()">
+        <img src="{{'pwa.purchase.success.contest.redirect.image.path' | customTranslate}}"
+          alt="{{'pwa.purchase.success.contest.redirect.image.alt.text' | customTranslate}}" /></a>
+    </div>
+    <div class="space_40"></div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf='showConsentResponse'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt">{{consentRespHeading}}</div>
+    <div class="pop_small_txt">{{consentRespMsg}}</div>
+    <div class="space_40"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+        <div class="fill_btn1">{{consentRespBtnText}}</div>
+      </a>
+    </div>
+    <div class="space_40"></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf='showPaytmResponse'>
+  <div class="pop_album_wrap">
+    <div class="space_40"></div>
+    <div class="pop_thankyou_txt">{{paytmRespHeading}}</div>
+    <div class="pop_small_txt">{{paytmRespMsg}}</div>
+    <div class="space_40"></div>
+    <div class="pop_confirm_btn">
+      <a href="javascript:void(0);" (click)="commonService.goToHome(true)">
+        <div class="fill_btn1">{{paytmRespBtnText}}</div>
+      </a>
+    </div>
+    <div class="space_40"></div>
+  </div>
+</ng-container>

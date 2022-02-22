@@ -1,0 +1,22 @@
+<!-- Dynamic width, height will not work -->
+<ng-container *ngIf="isBannerImage">
+        <ng-container *ngIf="loading && actualImgSrc"> <img src="{{loadImgSrc}}"
+                        alt="{{'pwa.loading.image.alt.text' | customTranslate}}" width="600px" height="388px" />
+        </ng-container>
+        <ng-container *ngIf="!actualImgSrc"> <img src="{{defaultImgSrc}}"
+                        alt="{{'pwa.default.image.alt.text' | customTranslate}}" width="600px" height="388px" />
+        </ng-container>
+        <img *ngIf="actualImgSrc && showImage" [hidden]="loading" (load)="onLoad()" src="{{actualImgSrc}}"
+                alt="{{'pwa.image.alt.text' | customTranslate}}" width="600px" height="388px" />
+</ng-container>
+
+<ng-container *ngIf="!isBannerImage">
+        <ng-container *ngIf="loading && actualImgSrc"> <img src="{{loadImgSrc}}"
+                        alt="{{'pwa.loading.image.alt.text' | customTranslate}}" width="180px" height="180px" />
+        </ng-container>
+        <ng-container *ngIf="!actualImgSrc"> <img src="{{defaultImgSrc}}"
+                        alt="{{'pwa.default.image.alt.text' | customTranslate}}" width="180px" height="180px" />
+        </ng-container>
+        <img *ngIf="actualImgSrc && showImage" [hidden]="loading" (load)="onLoad()" src="{{actualImgSrc}}"
+                alt="{{'pwa.image.alt.text' | customTranslate}}" width="180px" height="180px" />
+</ng-container>

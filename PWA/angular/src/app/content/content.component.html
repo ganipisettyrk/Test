@@ -1,0 +1,114 @@
+<ng-container *ngIf="contentObj">
+  <div class="clearfix"></div>
+  <!--Player page navigation Starts-->
+  <div class="player_navigation_wrap">
+    <div style="position: absolute; margin-top: 50px; z-index: 1; width: 100%;">
+      <div class="back_btn" (click)="commonService.goBack()">
+        <a href="javascript:void(0);">
+          <img src="image/bck_btn.png" width="55" height="55" alt="{{'pwa.image.alt.text' | customTranslate}}" />
+        </a>
+      </div>
+      <div class="tag_selection_menu_wrap">
+        <div class="tag_select_main_menu" style="width: 100%; overflow-x: auto; overflow-y: hidden;">
+          <a href="javascript:void(0);" (click)="showOrHideStoryPage(false)">
+            <div id="music_btn" class="outline_btn select">{{'pwa.content.music.text' | customTranslate}}</div>
+          </a>
+          <a href="javascript:void(0);" *ngIf="showVideoOption">
+            <div id="video_btn" class="outline_btn">{{'pwa.content.video.text' | customTranslate}}</div>
+          </a>
+          <a href="javascript:void(0);" *ngIf="isStoryEnabled && storyDesc" (click)="showOrHideStoryPage(true)">
+            <div id="story_btn" class="outline_btn">{{'pwa.content.story.text' | customTranslate}}</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Player page navigation Ends-->
+
+  <div id="playerSection" class="slider_content_player">
+    <!-- start Basic Jquery Slider -->
+    <div id="sliderContainer6"
+      style="position:relative;margin:0 auto;top:0px;left:0px;width:500px;height:300px;overflow:hidden;visibility:hidden;">
+      <div data-u="slides"
+        style="cursor:default;position:relative;top:0px;left:0px;width:500px;height:300px;overflow:hidden;"
+        id="slides_sliderContainer6">
+        <div *ngFor="let item of corouselItems; let isLast=last;" appCustomJssor isLast={{isLast}} sliderId="6"
+          sliderIndex="{{contentIndex}}" (sliderInstance)="getContentSliderInstance($event)">
+          <div class="blur_outer">
+            <div class="blur_image">
+              <img src="{{item.primary_image || contentSliderImage}}" alt="{{'pwa.image.alt.text' | customTranslate}}"
+                width="183" height="183" class="blur">
+            </div>
+            <div class="image">
+              <div class="play_container_small">
+              </div>
+              <img src="{{item.primary_image || contentSliderImage}}" alt="{{'pwa.image.alt.text' | customTranslate}}"
+                width="800" height="800" />
+            </div>
+            <div class="player_artist_name">
+              {{item | customEllipse : item.type : trackNameSize}}</div>
+            <div class="player_album_name">
+              {{item | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+            </div>
+            <div class="player_set_btn" *ngIf="!isOnStoryView">
+              <a *ngIf="!isRTContent" href="javascript:void(0)"
+                (click)="getCurrentSliderIndexAndInititatePurchase(false)" class="one_open">
+                <div class="fill_btn">{{'pwa.content.set.button.text'  | customTranslate}}</div>
+              </a>
+              <a *ngIf="isRTContent" href="javascript:void(0)" (click)="getCurrentSliderIndexAndInititatePurchase(true)"
+                class="one_open">
+                <div class="fill_btn">{{'pwa.rt.content.get.button.text'  | customTranslate}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tile_player_wrap" *ngIf="!isOnStoryView">
+    <div style="width: 130px; margin-left: auto; margin-right: auto;">
+      <div class="tile_player_rewind">
+        <a href="javascript:void(0)" (click)="moveSliderLeft();">
+          <img src="image/ic_rwd.png" alt="{{'pwa.image.alt.text' | customTranslate}}" width="40" height="40"
+            border="0" />
+        </a>
+      </div>
+      <div class="tile_player_play">
+        <div class="play_container_small1">
+          <div *ngIf="!isRTContent" id="{{corouselItems[contentIndex]?.preview_stream_url}}" class="play2a"
+            (click)="getCurrentSliderIndexAndPlay();"></div>
+          <div *ngIf="isRTContent" id="{{corouselItems[contentIndex].realtone?.made_reference_id}}" class="play2a"
+            (click)="getCurrentSliderIndexAndPlay();"></div>
+        </div>
+      </div>
+      <div class="tile_player_forward">
+        <a href="javascript:void(0)" (click)="moveSliderRight();">
+          <img src="image/ic_fwd.png" width="40" height="40" alt="{{'pwa.image.alt.text' | customTranslate}}" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="player_page_bg"></div>
+  <div *ngIf="!isOnStoryView" class="space_30"></div>
+  <!--Subheader - WEB starts-->
+</ng-container>
+<hr class="hr_1000px">
+
+<ng-container *ngIf="isOnStoryView && isStoryEnabled && storyDesc">
+    <div class="story_txt_container" [innerHTML]="storyDesc | sanitizeHtml"></div>
+</ng-container>
+
+<div class="space_10"></div>
+
+<!--Content recommendations start-->
+<ng-container
+  *ngIf="!isOnStoryView && showRecommendations  && recContentId != null && recAlbumName != null && !isRTContent">
+
+  <app-chart-content [isRecommendation]=true [contentIds]="recContentId" [albumName]="recAlbumName" [maxItem]=6
+    [moreButtonUrl]="getMoreButtonUrl(recContentId, recAlbumName)">
+  </app-chart-content>
+
+</ng-container>
+<!--Content recommendations end-->

@@ -1,0 +1,8 @@
+/.gradle/
+/dist/
+/src/main/resources/static
+/bin/
+/.settings/
+/.classpath
+/.project
+/.vscode/

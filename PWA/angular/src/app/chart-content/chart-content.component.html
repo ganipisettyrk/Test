@@ -1,0 +1,147 @@
+<div class="space_80" *ngIf="isSearchPage || isTrendingResultsPage"></div>
+<!--Subheader - WEB starts-->
+<ng-container *ngIf="chartItem">
+  <div class="inside_heading">
+    <span *ngIf="showBackButton">
+      <a href="javascript:void(0);" (click)="commonService.goBack();">
+        <img src="image/bck_btn_black.png" width="20" height="20" alt="{{'pwa.image.alt.text' | customTranslate}}">
+      </a>
+    </span>
+    {{heading}}
+  </div>
+  <div class="more_btn_wrap_inside">
+    <div class="more_btn" *ngIf="showMoreButton">
+      <a href="javascript:void(0)"
+        (click)="commonService.goToURL(moreButtonUrl);">{{'pwa.more.button.text' | customTranslate}}</a>
+    </div>
+  </div>
+  <!--Subheader - WEB ends-->
+  <div class="space_5"></div>
+  <!--Store  Container - WEB Starts-->
+  <div class="store_home_container" id="store_home_container_1">
+    <ul class="album_ContentBlock_List1">
+      <li class="album_ContentBlock_List1" *ngFor="let rbt of chartItem; trackBy:commonService.trackById; let i=index;">
+        <div [ngClass]="showProfileCharts ? 'home_profile_banner' : 'home_small_banner'">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td [attr.colspan]="showSetBtn || showGetBtn ? 2 : 0" style="text-align:left;">
+                <div class="album_wrap">
+                  <a href="javascript:void(0);" *ngIf="showProfileCharts"
+                    (click)="openProfilePopup(rbt.chart_id, rbt.chart_item_count);">
+                    <div class="big_16_black">{{rbt.name}}</div>
+                  </a>
+                  <div class="add_icon" *ngIf="!showCharts && !showProfileCharts && !showShufflesCharts">
+                    <div *ngIf="!isRTContent" id="{{rbt.preview_stream_url}}" class="play1a"
+                      (click)="commonService.toggleAudioControls(isRTContent, 'play1b', 'Categories-'+ heading + '-Preview', rbt);">
+                    </div>
+                    <div *ngIf="isRTContent" id="{{rbt.realtone?.made_reference_id}}" class="play1a"
+                      (click)="commonService.toggleAudioControls(isRTContent, 'play1b', 'Categories-'+ heading + '-Preview', rbt);">
+                    </div>
+                  </div>
+                  <div class="add_icon" *ngIf="showProfileCharts" style="bottom: 25px;">
+                    <div id="{{rbt.name}}_{{rbt.id}}" class="play1a"
+                      (click)="chartService.getFirstItemInChartForPreview(rbt.id, rbt.name+'_'+rbt.id, 'play1b');">
+                    </div>
+                  </div>
+                  <div class="album_placeholder"
+                    (click)="commonService.goToChartContentPage(chartItem, i, totalItemCount, 'Categories-' + heading + '-Preview', chartId, isRTContent, isRecommendation)"
+                    *ngIf="!showCharts && !showProfileCharts && !showShufflesCharts && !showAzanCharts && !showRecommendChart">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [defaultImgSrc]="chartImageDefault"
+                      [loadImgSrc]="chartImageLoading" [isBannerImage]="false">
+                    </app-custom-image-loader>
+                  </div>
+                  <div class="album_placeholder" *ngIf="showCharts"
+                    (click)="commonService.goToURL(commonService.getChartContentUrl(rbt))">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [isBannerImage]="false"
+                      [defaultImgSrc]="chartSliderImageDefault" [loadImgSrc]="chartSliderImageLoading" >
+                    </app-custom-image-loader>
+
+                  </div>
+                  <div class="album_placeholder" *ngIf="showProfileCharts"
+                    (click)="openProfilePopup(rbt.chart_id, rbt.chart_item_count);">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [isBannerImage]="false"
+                      [defaultImgSrc]="profilesSliderImageDefault" [loadImgSrc]="profilesSliderImageLoading">
+                    </app-custom-image-loader>
+                  </div>
+                  <div class="album_placeholder_shuffle one_open" *ngIf="showShufflesCharts"
+                    (click)="openShufflePopup(rbt.id, rbt.type)">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [isBannerImage]="false"
+                      [defaultImgSrc]="shufflesSliderImageDefault" [loadImgSrc]="shufflesSliderImageLoading">
+                    </app-custom-image-loader>
+                  </div>
+                  <div class="album_placeholder_shuffle_bg" *ngIf="showShufflesCharts">
+                    <img src="image/shuffle_bg.png" width="183" height="183"
+                      alt="{{'pwa.image.alt.text' | customTranslate}}" />
+                  </div>
+                  <div class="album_placeholder" *ngIf="showAzanCharts"
+                    (click)="commonService.goToContentPage(chartItem, i, totalItemCount, 'Azan-Preview', isRTContent)">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [defaultImgSrc]="azanSliderImageDefault"
+                      [loadImgSrc]="azanSliderImageLoading" [isBannerImage]="false">
+                    </app-custom-image-loader>
+                  </div>
+                  <div class="album_placeholder" *ngIf="showRecommendChart"
+                    (click)="commonService.goToContentPage(chartItem, i, totalItemCount, 'Recommendation-Preview ', isRTContent)">
+                    <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [isBannerImage]="false"
+                      [defaultImgSrc]="recommendSliderImageDefault" [loadImgSrc]="recommendSliderImageLoading">
+                    </app-custom-image-loader>
+                  </div>
+                  <div class="space_140" *ngIf="showShufflesCharts"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="big_16_black1 ellipse" style="font-weight:normal;" *ngIf="!showCharts && !showShufflesCharts">
+                {{rbt | customEllipse : rbt.type : trackNameSize}}
+              </td>
+              <td *ngIf="showSetBtn && !isRTContent && !showCharts && !showShufflesCharts && !showProfileCharts"
+                width="28%" rowspan="2" style="font-weight:normal;">
+                <a href="javascript:void(0);" class="one_open">
+                  <div class="fill_btn1_smallest"
+                    (click)="commonService.initiateLoginOrAction(rbt, 'Categories-' + heading + '-Preview', false, null, true)">
+                    {{'pwa.content.set.button.text' | customTranslate}}
+                  </div>
+                </a>
+              </td>
+              <td *ngIf="showGetBtn && isRTContent && !showCharts && !showShufflesCharts && !showProfileCharts"
+                width="28%" rowspan="2" style="font-weight:normal;">
+                <a href="javascript:void(0);" class="one_open">
+                  <div class="fill_btn1_smallest"
+                    (click)="commonService.initiateLoginOrAction(rbt, 'Categories-' + heading + '-Preview', true, null, true)">
+                    {{'pwa.rt.content.get.button.text' | customTranslate}}
+                  </div>
+                </a>
+              </td>
+              <td *ngIf="!isArabic && showShufflesCharts" class="big_16_black1 ellipse"
+                style="font-weight:normal; padding-left:20px">
+                {{rbt | customEllipse : rbt.type : shuffleDisplaySize | shuffleDetails : rbt.total_item_count}}
+              </td>
+              <td *ngIf="isArabic && showShufflesCharts" class="big_16_black1 ellipse"
+                style="font-weight:normal; padding-right:35px">
+                {{rbt | customEllipse : rbt.type : shuffleDisplaySize | shuffleDetails : rbt.total_item_count}}
+              </td>
+            </tr>
+            <tr *ngIf="!showProfileCharts">
+              <td class="big_16_black ellipse" style="vertical-align:top; padding-top:0px">
+                <ng-container *ngIf="!showCharts && !showShufflesCharts ">
+                  {{rbt | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+                </ng-container>
+                <ng-container *ngIf="showShufflesCharts">&nbsp;</ng-container>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <div *ngIf="showLoadMore" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="50"
+      (scrolled)="loadMore()">
+    </div>
+    <ng-container *ngIf="showMoreLoaderImage">
+      <div class="space_40"></div>
+      <div class="loading_content_wrap"><img src="image/loading_content.gif" width="32" height="32"
+          alt="{{'pwa.loading.image.alt.text' | customTranslate}}" /></div>
+    </ng-container>
+    <div class="clearfix"></div>
+    <div class="space_20"></div>
+  </div>
+</ng-container>
+<!--Store  Container - WEB Ends-->

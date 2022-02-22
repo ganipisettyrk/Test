@@ -1,0 +1,54 @@
+<div class="space_30"></div>
+<div class="user_icon">
+  <img src="{{'pwa.header.user.image.path'| customTranslate}}" width="80" height="80"
+    alt="{{'pwa.image.alt.text' | customTranslate}}" />
+</div>
+<div class="user_name_menu">{{"pwa.menu.hello.text" | customTranslate}}</div>
+
+<ul>
+  <li>&nbsp;</li>
+  <li><a href="javascript:void(0);"
+      (click)="populateFeature(activityMenuItem)">{{'pwa.menu.settings.heading' | customTranslate}}</a>
+  </li>
+  <li *ngFor="let menuItem of menuSettingsItems">
+    <a *ngIf="!isMyAccountUrl(menuItem) && menuItem.url != 'changenumber'" href="javascript:void(0);" (click)="populateFeature(menuItem)">
+      {{menuItem.displayText}}
+    </a>
+    <ng-container *ngIf="isMyAccountUrl(menuItem) || menuItem.url == 'changenumber'">
+      <table width="91%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td style="width: 60%; padding-left: 10px;">
+              <a href="javascript:void(0);" (click)="populateFeature(menuItem)">
+                {{menuItem.displayText}}
+              </a>
+            </td>
+            <td style="border-bottom: 1px solid #efefef;width: 40%; text-align: right;">
+              <span class="red_clr small_fnt" *ngIf="isMyAccountUrl(menuItem) && showMyAccountPrice(menuItem)">
+                {{menuItem.value.amount}} / {{menuItem.value.length}} {{menuItem.value.unit | titlecase}}
+              </span>
+              <span class="red_clr small_fnt" *ngIf="menuItem.url == 'changenumber'">
+                {{menuItem.value}}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+   
+  </li>
+
+  <li>&nbsp;</li>
+  <li>&nbsp;</li>
+  <li><a class="username">{{'pwa.menu.about.heading' | customTranslate}}</a></li>
+  <li *ngFor="let menuAboutItem of menuAboutItems">
+    <a href="javascript:void(0);" (click)="populateFeature(menuAboutItem)">
+      {{menuAboutItem.displayText}}
+    </a>
+  </li>
+  <li *ngIf="showUnsubscribe">
+    <a href="javascript:void(0);" (click)="confirmUnsubscribe()">
+      {{'pwa.menu.unsubscribe.text' | customTranslate}}
+    </a>
+  </li>
+</ul>

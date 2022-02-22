@@ -1,0 +1,70 @@
+<ng-container *ngIf="msisdn">
+  <div class="space_80"></div>
+  <!--Trending Container - WEB Ends-->
+  <!--Subheader - WEB starts-->
+  <div class="inside_heading">{{'pwa.feedback.heading' | customTranslate}}</div>
+  <div class="more_btn_wrap_inside"></div>
+  <!--Subheader - WEB ends-->
+  <div class="space_5"></div>
+  <!--TC  Container - WEB Starts-->
+  <div class="text_container">
+    <div class="clear"></div>
+    <!--Feedback Content Starts -->
+    <div class="feedback_wraper" id="feedback_wraper_1">
+      <div *ngIf="isFeedbackValid" class="pop_thankyou_txt center">
+        {{'pwa.feedback.success.msg' | customTranslate}}</div>
+      <form #formGroup="ngForm" (ngSubmit)="submitFeedback(formGroup)" [class.feedback_disable]="isFeedbackValid">
+        <div>
+          <input placeholder="{{'pwa.feedback.name.placeholder' | customTranslate}}" type="text" required ngModel
+            name="nameModel">
+          <div *ngIf="formGroup.submitted && !formGroup.controls.nameModel.valid">
+            <div class="error_message">{{'pwa.feedback.empty.name.error' | customTranslate}}</div>
+          </div>
+        </div>
+
+        <div>
+          <input type="text" required="" class="lock"
+            placeholder="{{'pwa.feedback.mobilenumber.placeholder' | customTranslate}}" readonly [value]="msisdn"
+            disabled>
+        </div>
+
+        <div>
+          <input placeholder="{{'pwa.feedback.email.placeholder' | customTranslate}}" type="text" required email ngModel
+            name="emailModel">
+
+          <div *ngIf="formGroup.submitted && !formGroup.controls.emailModel.valid">
+
+            <div *ngIf="formGroup.controls.emailModel.errors.required;else correctEmail">
+              <div class="error_message">{{'pwa.feedback.empty.email.error' | customTranslate}}</div>
+            </div>
+            <ng-template #correctEmail>
+              <div *ngIf="formGroup.controls.emailModel.errors.email">
+                <div class="error_message">{{'pwa.feedback.invalid.email.error' | customTranslate}}</div>
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+
+        <div>
+          <input placeholder="{{'pwa.feedback.message.placeholder'| customTranslate}}" type="text" required ngModel
+            name="feedbackModel">
+          <div *ngIf="formGroup.submitted && !formGroup.controls.feedbackModel.valid">
+            <div class="error_message">{{'pwa.feedback.empty.feedback.error' | customTranslate}}</div>
+          </div>
+        </div>
+        <div class="space_40"></div>
+        <div class="clearfix"></div>
+        <div class="feedback_btn">
+          <button type="submit" class="fill_btn1" style ="border:none;">
+            {{'pwa.feedback.submit.button' | customTranslate}}</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="space_20"></div>
+    <!--Feedback Content Ends -->
+
+  </div>
+</ng-container>

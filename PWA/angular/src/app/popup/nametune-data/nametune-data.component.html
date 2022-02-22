@@ -1,0 +1,181 @@
+<ng-container *ngIf="!showCreateNameTuneScreen && !showCreateConfirmScreen&& !showCreateResponseScreen">
+  <div class="space_20"></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="nametune_text">{{subheadingTxt}}</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="space_10"></div>
+          <div class="popup_nametune" style="text-align: center;">
+            <form [formGroup]="nameTuneFormPopup" (ngSubmit)="initiateNametuneSearchInPopUp(nameTuneFormPopup)">
+              <input type="text" class="select_box_nametune" placeholder="{{placeholderTxt}}" id="nameTuneInputPopup"
+                name="nameTuneSearchTextPopup" [value]="nameTune" formControlName="nameTuneSearchTextPopup"
+                autocomplete="off" style="font-size: 14px;" [customFocus]="true" />
+              <a href="javascript:void(0)" (click)="clearValues()">
+                <div class="close_img">
+                  <img src="image/nametune_close_bg.png" width="20" height="27"
+                    alt="{{'pwa.close.image.alt.text' | customTranslate}}">
+                </div>
+              </a>
+            </form>
+          </div>
+          <div class="space_20"></div>
+        </td>
+      </tr>
+      <tr *ngIf="null != resultItems ">
+        <td class="nametune_text">{{resultHeadingTxt}}</td>
+      </tr>
+      <tr *ngIf="null != resultItems ">
+        <td class="share_text">
+          <div class="search_pg_table1" style="height: 300px; overflow-y: auto;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <ng-container *ngFor="let item of resultItems">
+                <tr class="white_bg">
+                  <td width="59%" height="28" style="vertical-align:center; padding-bottom: 0px; " class="heading"><a
+                      href="javascript:void(0)" class="ellipse">{{commonService.getNameTuneName(item.track_name)}}</a>
+                  </td>
+                  <td width="15%" class="center">
+                    <div class="add_icon">
+                      <div id="{{item.preview_stream_url}}" class="play7a"
+                        (click)="commonService.toggleAudioControls(false, 'play7b', 'name tune', item);">
+                      </div>
+                    </div>
+                  </td>
+                  <td width="10%" class="center"><a href="javascript:void(0)" (click)="initiatePurchase(item)">
+                      <input type="button" value="{{'pwa.content.set.button.text' | customTranslate}}"
+                        class="outline_btn_small three_close eleven_open" />
+                    </a>
+                  </td>
+                </tr>
+              </ng-container>
+              <div *ngIf="showLoadMore" infiniteScroll [infiniteScrollContainer]="'.search_pg_table1'" [fromRoot]="true"
+                [infiniteScrollDistance]="0" [infiniteScrollThrottle]="50" (scrolled)="loadMore()">
+              </div>
+              <ng-container *ngIf="showMoreLoaderImage">
+                <tr class="white_bg">
+                  <td height="28" colspan="3" class="heading"
+                    style="vertical-align:middle; padding-bottom: 0px; text-align: center;">
+                    <div class="load_more_ic"><img src="image/loading_content.gif"
+                        alt="{{'pwa.image.alt.text' | customTranslate}}"></div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="share_text">
+          <div class="space_10"></div>
+          <div class="home_subheading" [innerHTML]="createTuneDescription | sanitizeHtml"></div>
+          <div class="space_15"></div>
+          <div class="btn_wrap">
+            <a href="javascript:void(0)" (click)="goToCreateScreen()">
+              <div class="fill_btn1 three_close six_open">
+                {{"pwa.popup.nametunes.create.new.button.text" | customTranslate }}</div>
+            </a>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="showCreateNameTuneScreen && !showCreateConfirmScreen && !showCreateResponseScreen">
+  <div class="space_60"></div>
+  <div class="space_15"></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="home_subheading" [innerHTML]="createTuneDescription | sanitizeHtml"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="space_10"></div>
+          <div class="" style="text-align: center;">
+            <input type="text" class="select_box_nametune_empty" [value]="nameTune" readonly>
+          </div>
+          <div class="space_20"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="pop_confirm_btn">
+            <a href="javascript:void(0)" class="six_close seven_open" data-popup-ordinal="0" id="open_17186412"
+              (click)="goToCreateConfirmtionScreen()">
+              <div class="fill_btn1">{{"pwa.popup.nametunes.create.button.text" | customTranslate}}</div>
+            </a></div>
+          <div class="space_40"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="showCreateNameTuneScreen && showCreateConfirmScreen && !showCreateResponseScreen">
+  <div class="space_60"></div>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="nametune_text">{{confirmationHeadingText}}</td>
+      </tr>
+      <tr>
+        <td class="share_text">
+          <div class="space_10"></div>
+          <div class="home_subheading" [innerHTML]="confirmationDescriptionText | sanitizeHtml"></div>
+          <div class="space_30"></div>
+          <div class="pop_small_txt"></div>
+          <div class="space_20"></div>
+          <div class="btn_wrap">
+            <a href="javascript:void(0)" (click)="closePopup()" style="display: inline;">
+              <div class="fill_btn1_grey seven_close eight_open" data-popup-ordinal="0" id="open_48544328">
+                {{"pwa.popup.nametunes.cancel.button.text"| customTranslate}}</div>
+            </a>&nbsp;&nbsp;
+            <a href="javascript:void(0)" (click)="createNameTune()" style="display: inline;">
+              <div class="fill_btn1 seven_close eight_open" data-popup-ordinal="1" id="open_88191505">
+                {{"pwa.popup.nametunes.confirm.button.text"| customTranslate}}</div>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="showCreateNameTuneScreen && showCreateConfirmScreen && showCreateResponseScreen">
+  <div class="space_60"></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="nametune_text">{{createResultHeadingText}}</td>
+      </tr>
+      <tr>
+        <td class="share_text">
+          <div class="space_10"></div>
+          <div class="home_subheading" [innerHTML]="createResultDescriptionText | sanitizeHtml"></div>
+          <div class="space_20"></div>
+          <div class="btn_wrap">
+            <a href="javascript:void(0)" (click)="goToStoreUrl()">
+              <div class="fill_btn1 eight_close ">{{"pwa.popup.nametunes.gotostore.button.text"| customTranslate}}</div>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

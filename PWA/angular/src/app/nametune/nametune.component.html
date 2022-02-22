@@ -1,0 +1,33 @@
+<!--Name Container - WEB Starts-->
+<div class="clearfix"></div>
+<div class="slider_content_name" id="slider_content_name_1">
+  <!--Subheader - WEB starts-->
+  <div class="space_100"></div>
+  <div class="nametune_home_heading"><h1>{{heading}}</h1></div>
+  <div class="home_subheading" *ngIf="!isTypeEnabled"><h2>{{subHeading}}</h2></div>
+  <!--Subheader - WEB ends-->
+  <div class="space_20"></div>
+  <div class="btn_wrap">
+    <form [formGroup]="nameTuneForm" (ngSubmit)="initiateNametuneSearch(nameTuneForm)">
+      <input type="text" class="select_box_small" placeholder="{{placeholderText}}" id="nameTuneInput"
+        name="nameTuneSearchText" [value]="nameTuneSearchString" formControlName="nameTuneSearchText" autocomplete="off"
+        style="font-size: 14px;" [customFocus]="false" />
+    </form>
+  </div>
+  <div class="space_10"></div>
+  <div class="name_meaning_wrap" *ngIf="isTypeEnabled">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td><input name='checkbox' type='radio' class='css-checkbox3' id='checkbox1' value="{{tuneType[0]}}" checked (change)="onTypeChange($event.target.value)" />
+            <label for='checkbox1' class='css-label3 three_open'>{{tuneDisplayText[0]}}</label></td>
+          <td><input name='checkbox' type='radio' class='css-checkbox3' id='checkbox2' value="{{tuneType[1]}}" (change)="onTypeChange($event.target.value)" />
+            <label for='checkbox2' class='css-label3 six_open'>{{tuneDisplayText[1]}}</label></td>
+          <td><input name='checkbox' type='radio' class='css-checkbox3' id='checkbox3' value="{{tuneType[2]}}" (change)="onTypeChange($event.target.value)" />
+            <label for='checkbox3' class='css-label3 eight_open'>{{tuneDisplayText[2]}}</label></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--Name Container - WEB ends-->

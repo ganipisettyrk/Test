@@ -1,0 +1,22 @@
+<ng-container *ngIf="shuffleItems">
+  <div class="subscription_form_wrap1">
+    <div style="width: 90%; overflow-x: scroll; overflow-y:hidden; display: block;">
+      <ul [style.width]="sliderWidth" class="SubscribeBlock_List1">
+        <li class="SubscribeBlock_List2" *ngFor="let rbt of shuffleItems">
+          <div class="pop_album_image">
+            <div class="add_icon" style="position: absolute; left: 65%;">
+              <div id="{{rbt.preview_stream_url}}" class="play1a"
+                (click)="commonService.toggleAudioControls(false, 'play1b', 'Shuffle-Preview', rbt);">
+              </div>
+            </div>
+            <div style="position: relative; width:183; height:183">
+              <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [defaultImgSrc]="sliderImageDefault"
+                [loadImgSrc]="sliderImageLoading" [isBannerImage]="false">
+              </app-custom-image-loader>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>

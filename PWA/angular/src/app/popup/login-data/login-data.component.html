@@ -1,0 +1,46 @@
+<div class="txt_wrap" *ngIf="!hideMsisdn">
+  <input type="tel" autocomplete="off" appNumberOnly [(ngModel)]="user.msisdn" name="msisdn"
+    maxlength="{{'pwa.msisdn.max.length' | customTranslate}}"
+    placeholder="{{'pwa.msisdn.placeholder.text' | customTranslate}}" [class]='classForMSISDN' #msisdnValidity="ngModel"
+    (ngModelChange)="textBoxOnChange(true)" (keyup)="sendOtp()" />
+</div>
+<div class="space_10"></div>
+<div class="error_message" *ngIf="invalidMSISDNDescription" [innerHTML]="invalidMSISDNDescription | sanitizeHtml">
+</div>
+<div class="error_message" *ngIf="sameMsisdnError">
+  {{'pwa.error.same.msisdn.entered' | customTranslate}}
+</div>
+
+<div class="space_10"></div>
+<div class="small_txt_pop" *ngIf="otpGenerated" [innerHTML]="'pwa.otp.sent.text' | customTranslate | sanitizeHtml">
+</div>
+
+<div class="space_15" *ngIf="otpGenerated"></div>
+<div class="txt_wrap" *ngIf="otpGenerated">
+  <input type="tel" autocomplete="one-time-code"  appNumberOnly [(ngModel)]="user.otp" name="otp"
+    maxlength="{{'pwa.otp.max.length' | customTranslate}}"
+    placeholder="{{'pwa.otp.placeholder.text' | customTranslate}}" [class]='classForOTP' #otpValidity="ngModel"
+    (ngModelChange)="textBoxOnChange(false)" (keyup)="validateOtp()" />
+</div>
+
+<div class="error_message" *ngIf="otpData['invalidOtp'] && !otpData['isMaxAttemptsReached']">
+  {{'pwa.otp.error.message' | customTranslate}}
+</div>
+
+<div class="error_message" *ngIf="otpData['isMaxAttemptsReached']">
+  {{'pwa.otp.error.message.attempts' | customTranslate}}
+</div>
+
+<div *ngIf="otpGenerated" class="clear"></div>
+<div *ngIf="otpGenerated" class="space_10"></div>
+<div *ngIf="otpGenerated" [ngClass]="enableResendOtpLink && !isMaxOtpGenerationReached? 'pop_error': 'disable_text'">
+  <a href="javascript:void(0);" (click)="resendOTP();">{{'pwa.resend.otp.text' | customTranslate}}</a>
+  <span id="countdown-timer" *ngIf="counter > 0"> {{counter}}
+  </span>
+</div>
+<div *ngIf="istncTextEnabledAtLogin && otpGenerated" class="space_30"></div>
+<div *ngIf="istncTextEnabledAtLogin && otpGenerated" class="small_txt_pop"
+  [innerHTML]="'pwa.login.tnc.text' | customTranslate | sanitizeHtml">
+</div>
+
+<div class="space_40"></div>

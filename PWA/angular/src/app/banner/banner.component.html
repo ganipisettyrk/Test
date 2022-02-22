@@ -1,0 +1,82 @@
+<!--Pormotional Banner Container - WEB Starts-->
+<div class="slider_content" *ngIf="isInitialLoadingCompleted">
+  <div id="sliderContainer1"
+    style="position:relative;margin:0 auto;top:60px;left:0px;width:1500px;height:400px;overflow:hidden;visibility:hidden;">
+    <div data-u="slides"
+      style="cursor:default;position:relative;top:0px;left:0px;width:1500px;height:400px;overflow:hidden;"
+      id="slides_sliderContainer1">
+      <div *ngFor="let rbt of bannerItems;let i=index; let isLast=last" appCustomJssor isLast={{isLast}} sliderId="1"
+        (sliderInstance)="getBannerSliderInstance($event)">
+        <div id="sliderContainer1_{{i}}"
+          *ngIf="rbt && (rbt.type == 'chart' || rbt.type == 'ringback' || rbt.type == 'realtone')"
+          class="home_big_banner">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="text-align:left;">
+                <div class="album_wrap">
+                  <div class="add_icon">
+                    <div *ngIf="rbt.type == 'ringback'" id="{{bannerItemsContentMap?.get(rbt.id)?.preview_stream_url}}"
+                      class="play3a" (click)="playBannerItem(bannerItemsContentMap?.get(rbt.id))">
+                    </div>
+                    <div *ngIf="rbt.type == 'realtone'"
+                      id="{{bannerItemsContentMap?.get(rbt.id)?.realtone?.made_reference_id}}" class="play3a"
+                      (click)="playBannerItem(bannerItemsContentMap?.get(rbt.id))">
+                    </div>
+                  </div>
+                  <div class="album_placeholder" (click)="goToPage(rbt)">
+                    <app-custom-image-loader [actualImgSrc]="rbt.image_url" [defaultImgSrc]="bannerImageDefault"
+                      [loadImgSrc]="bannerImageLoading" [showImage]="imageItemsMap.get(i)" [isBannerImage]="true">
+                    </app-custom-image-loader>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <ng-container *ngIf="rbt.type == 'ringback' || rbt.type == 'realtone'">
+              <tr>
+                <td class="big_16_black1" style="font-weight:normal;">
+                  {{bannerItemsContentMap?.get(rbt.id) | customEllipse : rbt.type : trackNameSize}}
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black" tyle="vertical-align:top; padding-top:0px">
+                  {{bannerItemsContentMap?.get(rbt.id) | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="rbt.type == 'chart'">
+              <tr>
+                <td class="big_16_black1" style="font-weight:normal;">
+                  {{rbt | customEllipse : rbt.type : trackNameSize}}
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black" tyle="vertical-align:top; padding-top:0px">
+                  {{rbt | customEllipse : rbt.type : trackNameSize}}
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Bullet Navigator -->
+    <div data-u="navigator" id="sliderContainer1_navigator" class="jssorBulletNavigator1"
+      style="position:absolute;bottom:0px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+      <div data-u="prototype" class="i" style="width:16px;height:16px;" [innerHTML]="svgBulletHTML | sanitizeHtml">
+      </div>
+    </div>
+    <!-- Arrow Navigator -->
+
+    <div data-u="arrowleft" id="sliderContainer1_arrowleft" class="jssorArrow1"
+      style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75"
+      [innerHTML]="svgArrowLeftHTML | sanitizeHtml">
+    </div>
+
+    <div data-u="arrowright" id="sliderContainer1_arrowright" class="jssorArrow1"
+      style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75"
+      [innerHTML]="svgArrowRightHTML | sanitizeHtml">
+    </div>
+
+  </div>
+</div>
+<!--Promotional Banner Container - WEB Ends-->

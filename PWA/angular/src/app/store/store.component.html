@@ -1,0 +1,10 @@
+<app-rt-slider *ngIf="showRTToggle" [default]="'ct'" [loadingCheckRequired]="true">
+</app-rt-slider>
+<ng-container *ngIf="chartsData">
+  <ng-container *ngFor="let chart of chartsData;trackBy:commonService.trackById">
+    <app-chart-content [isShuffles]="isShuffle" [chartId]="chart.id" [maxItem]=12
+      [moreButtonUrl]="getMoreButtonUrl(chart)">
+    </app-chart-content>
+    <div class="space_30"></div>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,66 @@
+<ng-container *ngIf="myAccount">
+    <div class="space_80"></div>
+    <div class="inside_heading">{{'pwa.menu.settings.myaccount.displaytext'| customTranslate}}</div>
+    <div class="space_10"></div>
+    <!--Subheader - WEB ends-->
+    <!--My account container starts -->
+    <div class="myaccount_container" id="myaccount_container_1">
+        <div class="space_30"></div>
+        <ng-container *ngIf="showRTToggle">
+            <div class="float_btn">
+                <app-rt-slider [default]="toggleValue" [isFromMyaccount]="true">
+                </app-rt-slider>
+            </div>
+            <div class="clear"></div>
+            <!-- <div class="space_20"></div> -->
+        </ng-container>
+        <!--myaccount Container Starts-->
+        <div class="subscription_wraper">
+            <div class="subscription_box">
+                <ul class="subscription_ContentBlock_List">
+                    <li class="subscription_ContentBlock_List">
+                        <div class="subscription_box_wrap">
+                            <div class="subscription_box_wrap">
+                                <ng-container *ngIf="showDisabledUserMsg">
+                                    <div class="service_details">{{disabledStatusMsg}}
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="!showDisabledUserMsg">
+                                    <div class="header" *ngIf="toggleValue =='ct'">
+                                        {{'pwa.myaccount.active.plan.text'|customTranslate}} {{activePlan}}</div>
+                                    <div class="header" *ngIf="toggleValue =='rt'">
+                                        {{'pwa.rt.myaccount.active.plan.text'|customTranslate}} {{activePlanRT}}</div>
+                                    <div class="service_details">
+                                        <ng-container *ngFor='let account of accountDetails;let i = index;'>
+                                            <span> <strong> {{account.key}} </strong> {{account.value}} </span>
+                                            <br>
+                                        </ng-container>
+                                        <div>
+                                            <div class="space_10"></div>
+                                            <ng-container *ngIf="showDisclaimer && toggleValue =='ct'">
+                                                <span style="font-size: 10px; line-height: 10px"
+                                                    [innerHTML]="'pwa.myaccount.disclaimer.text' | customTranslate | sanitizeHtml">
+                                                </span>
+                                            </ng-container>
+                                            <ng-container *ngIf="showRTDisclaimer && toggleValue =='rt'">
+                                                <span style="font-size: 10px; line-height: 10px"
+                                                    [innerHTML]="'pwa.rt.myaccount.disclaimer.text' | customTranslate | sanitizeHtml">
+                                                </span>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div class="space_20"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="subscription_ContentBlock_List">&nbsp;</li>
+                </ul>
+            </div>
+        </div>
+        <!--myaccount Container Ends-->
+    </div>
+    <div class="clearfix"></div>
+    <div class="space_20"></div>
+</ng-container>
+<!--My account container ends -->
