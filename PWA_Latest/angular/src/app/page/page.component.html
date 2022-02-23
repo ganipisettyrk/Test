@@ -1,0 +1,9 @@
+<ng-container *ngIf="data">
+    <div class="space_80"></div>
+    <div class="inside_heading">{{headingText}}</div>
+    <div class="more_btn_wrap_inside"></div>
+    <div class="space_5"></div>
+    <div class="text_container" [innerHTML]="data | sanitizeHtml"></div>
+    <div class="clearfix"></div>
+    <div class="space_20"></div>
+</ng-container>

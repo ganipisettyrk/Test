@@ -1,0 +1,93 @@
+<ng-container *ngIf="isInitialLoadingCompleted">
+  <!--Navigation Starts-->
+  <div class="navigation" id="navigation_1">
+    <div class="menu_close">
+      <img src="image/close_search.png" width="80" height="80" alt="{{'pwa.close.image.alt.text' | customTranslate}}"
+        (click)="updateMenuDisplay()" />
+    </div>
+    <app-menu *ngIf="displayMenu && !showSearchInputBox" (displayMenuValue)="updateDisplayMenuValue($event)"></app-menu>
+  </div>
+  <!--Navigation Starts-->
+  <!--Header Container Starts-->
+  <header>
+    <!--Header Container Starts-->
+    <div class="callertune_header_wrap" id="callertune_header_wrap_1">
+      <ng-container *ngIf="!showSearchInputBox">
+        <div class="logo">
+          <a href="javascript:void(0)" (click)="commonService.goToURL(headerLogoUrl);">
+            <img src="{{'pwa.header.logo.image.path'| customTranslate}}" width="600" height="138"
+              alt="{{'pwa.header.logo.image.alt.text'| customTranslate}}" />
+          </a>
+        </div>
+        <a href="javascript:void(0)" (click)="updateMenuDisplay()">
+          <div class="menu_home_logo nav_bar"><img src="{{'pwa.header.menu.icon.path'| customTranslate}}" width="270"
+              height="270" alt="{{'pwa.header.menu.icon.alt.text'| customTranslate}}" /></div>
+        </a>
+        <div class="search_home_logo">
+          <img src="{{'pwa.header.search.icon.path'| customTranslate}}" width="270" height="270"
+            alt="{{'pwa.header.search.icon.alt.text'| customTranslate}}" (click)="showSearchBox()" />
+        </div>
+
+        <ng-container *ngIf="!hideBrowsingLanguage">
+          <div class="language_wrap" *ngIf="browsingLanguageToggle">
+            <div class="toggle_btn_wrap">
+              <div class="can-toggle demo-rebrand-2">
+                <input id="e" type="checkbox" checked (click)="updateBrowsingLanguage(browsingLanguage);">
+                <label for="e">
+                  <div class="can-toggle__switch" [attr.data-checked]="langDisplayText[0]"
+                    [attr.data-unchecked]="langDisplayText[1]"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="language_wrap1" *ngIf="browsingLanguageSelect">
+            <div class="nav-wrapper">
+              <div class="sl-nav">
+                <i class="fa fa-globe" style="font-size: 16px; color:#4c4c4c;"></i>&nbsp;
+                <ul>
+                  <li>{{langDisplayText[0]}}<i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <div class="triangle"></div>
+                    <ul>
+                      <li *ngFor="let lang of langDisplayText" (click)="updateBrowsingLanguage(lang);">{{lang}}</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="showSearchInputBox">
+        <div class="space_15"></div>
+        <div class="search_light">
+          <img src="image/ic_search_enhance.png" width="30" height="30"
+            alt="{{'pwa.header.search.icon.alt.text'| customTranslate}}" />
+        </div>
+        <div class="search_option">
+          <form [formGroup]="searchForm" *ngIf="!searchBoxReadonly" (ngSubmit)="initiateSearchFromForm(searchForm)">
+            <input type="text" class="language_input" (keyup)="onKeyUp($event)" id="myInput" name="searchText"
+              [value]="searchString" formControlName="searchText" autocomplete="off"
+              [placeholder]="searchBoxPlaceholder" [title]="searchBoxTitle" style="font-size: 14px;"
+              [customFocus]="true" />
+            <input type="submit" id="search-submit" />
+          </form>
+          <input type="text" class="language_input" id="myInput" name="searchText" *ngIf="searchBoxReadonly"
+            [value]="searchString" readonly style="font-size: 14px;" />
+        </div>
+        <div class="search_close_new">
+          <a href="javascript:void(0);" (click)="hideSearchBox()">
+            <img src="image/close_search.png" width="30" height="30"
+              alt="{{'pwa.close.image.alt.text' | customTranslate}}" />
+          </a>
+        </div>
+      </ng-container>
+    </div>
+
+    <!--Header Container starts -->
+  </header>
+  <div id="new_overlay_menu" (click)="updateMenuDisplay()"></div>
+  <div class="clearfix"></div>
+
+  <!--Header Container Ends-->
+</ng-container>

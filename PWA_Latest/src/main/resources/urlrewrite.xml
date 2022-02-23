@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!-- Configuration file for UrlRewriteFilter http://www.tuckey.org/urlrewrite/ -->
+<urlrewrite>
+
+	<rule match-type="regex">
+		<from>(.*)/(home|store|moreshuffle|searchtags|activity|consent|header|error|myaccount|rtstore)$</from>
+		<to>/index.html</to>
+	</rule>
+
+	<rule match-type="regex">
+		<from>(.*)/more/([a-zA-Z_]+)/([0-9]+)$</from>
+		<to>/index.html</to>
+	</rule>	
+
+	<rule match-type="regex">
+		<from>(.*)/more/([a-zA-Z_]+)/(.*)</from>
+		<to>/index.html</to>
+	</rule>	
+
+	<rule match-type="regex">
+		<from>(.*)/page/([a-zA-Z_]+)$</from>
+		<to>/index.html</to>
+	</rule>	
+
+    <rule match-type="regex">
+		<from>(.*)/userfeedback$</from>
+		<to>/index.html</to>
+	</rule>	
+	<!--This will be used when user clicks more from search results page-->
+	<rule match-type="regex">
+		<from>(.*)/(searchmore|rtsearchmore)/([a-zA-Z_]+)/([a-zA-Z_ ]+)$</from>
+		<to>/index.html</to>
+	</rule>
+
+	<!--This will be used for content deep linking promotions-->
+	<rule match-type="regex">
+		<from>(.*)/(content|rtcontent)/([0-9]+)/(.*)$</from>
+		<to>/index.html</to>
+	</rule>
+	
+	<rule match-type="regex">
+		<from>(.*)/login$</from>
+		<to>/index.html</to>
+	</rule>
+
+	<rule match-type="regex">
+		<from>(.*)/search/([a-zA-Z_ ]+)$</from>
+		<to>/index.html</to>
+	</rule>
+
+	<rule match-type="regex">
+		<from>(.*)/paymentresp$</from>
+		<to>/index.html</to>
+	</rule>
+	<rule match-type="regex">
+		<from>(.*)/header/ooredo$</from>
+		<to>/index.html</to>
+	</rule>
+		<rule match-type="regex">
+		<from>(.*)/header/contest$</from>
+		<to>/index.html</to>
+	</rule>
+</urlrewrite>

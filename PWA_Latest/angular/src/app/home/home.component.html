@@ -1,0 +1,29 @@
+<app-rt-slider *ngIf="showRTToggle" [default]="'ct'" [loadingCheckRequired]="true" [isFromHome]="true">
+</app-rt-slider>
+
+<app-slider *ngIf="showRecommend" (valueNotExists)="updateRecommendSliderView($event)" [type]="'recommendChart'"
+    [Id]="8" [sliderHeading]="recommendHeading" [sliderSubHeading]="recommendSubheading" [maxItems]="recommendMaxItems"
+    [defaultImageSize]="recommendDefault" [isMobile]="isMobile">
+</app-slider>
+
+<app-slider *ngIf="showTrending && this.displayMap.has('showTrending')"
+    (valueNotExists)="updateTrendingSliderView($event)" [type]="'dynamicChart'" [Id]="2"
+    [sliderHeading]="trendingSliderHeading" [sliderSubHeading]="trendingSliderSubHeading"
+    [buttonText]="trendingButtonText" [url]="trendingButtonUrl" [defaultImageSize]="trendingDefault"
+    [isMobile]="isMobile">
+</app-slider>
+
+<ng-template #vcrChartSlider> </ng-template>
+
+<app-slider *ngIf="showAzan && this.displayMap.has('showAzan')" (valueNotExists)="updateAzanSliderView($event)"
+    [type]="'azanChart'" [Id]="5" [sliderHeading]="azanHeading" [sliderSubHeading]="azanSubheading"
+    [chartId]="azanParentId" [maxItems]="azanMaxItems" [defaultImageSize]="azanDefault" [isMobile]="isMobile">
+</app-slider>
+
+<ng-template #vcrProfileSlider> </ng-template>
+<ng-template #vcrNametune> </ng-template>
+<ng-template #vcrShuffleSlider> </ng-template>
+<ng-template #vcrAdvertise> </ng-template>
+
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="5" (scrolled)="loadMore()">
+</div>

@@ -1,0 +1,86 @@
+<ng-container *ngIf="null != rbtItems && isInitialLoadingCompleted">
+  <!--Subheader - WEB starts-->
+  <div class="space_20"></div>
+  <div class="home_heading"><h1>{{sliderHeading}}</h1></div>
+  <div class="home_subheading"><h2>{{sliderSubHeading}}</h2></div>
+  <div class="more_btn_wrap" *ngIf="type == 'dynamicChart'">
+    <div class="more_btn"><a href="javascript:void(0)" (click)="commonService.goToURL(url);">{{buttonText}}</a></div>
+  </div>
+
+  <div class="more_btn_wrap" *ngIf="type == 'azanChart' && showMore">
+    <div class="more_btn"><a href="javascript:void(0)"
+        (click)="commonService.goToURL('/more/azan/' + chartId);">{{'pwa.more.button.text' | customTranslate}}</a>
+    </div>
+  </div>
+
+  <div class="more_btn_wrap" *ngIf="type == 'recommendChart' && showMore">
+    <div class="more_btn"><a href="javascript:void(0)"
+        (click)="commonService.goToURL('/more/recommend');">{{'pwa.more.button.text' | customTranslate}}</a>
+    </div>
+  </div>
+
+  <!--Subheader - WEB ends-->
+  <div class="clearfix"></div>
+  <div class="space_30"></div>
+  <!--Trending Container - WEB Starts-->
+  <div class="slider_content_trending">
+    <!-- start Basic Jquery Slider -->
+    <div id="sliderContainer{{Id}}"
+      style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:195px;overflow:hidden;visibility:hidden;">
+      <div data-u="slides" id="slides_sliderContainer{{Id}}"
+        style="cursor:default;position:relative;top:0px;left:0px;width:1000px;height:180px;overflow:hidden;">
+        <div *ngFor="let rbt of rbtItems; let isLast=last; let i=index;" appCustomJssor isLast={{isLast}}
+          sliderId={{Id}}>
+          <div class="home_small_banner" id="sliderContainer{{Id}}_{{i}}">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="text-align:left;" [attr.colspan]="showSetBtn ? 2 : 0">
+                  <div class="album_wrap">
+                    <div class="add_icon">
+                      <div id="{{rbt.preview_stream_url}}" class="play1a"
+                        (click)="commonService.toggleAudioControls(false, 'play1b', sliderHeading + '-preview', rbt);">
+                      </div>
+                    </div>
+                    <div class="album_placeholder" (click)="goToContentPage(rbtItems, i)">
+                      <app-custom-image-loader [actualImgSrc]="rbt.primary_image" [defaultImgSrc]="sliderImageDefault"
+                        [loadImgSrc]="sliderImageLoading" [showImage]="imageItemsMap.get(i)" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black1 ellipse" style="font-weight:normal;">
+                  {{rbt | customEllipse : rbt.type : trackNameSize}}
+                </td>
+                <td *ngIf="showSetBtn" width="28%" rowspan="2" class="" style="font-weight:normal;">
+                  <a href="javascript:void(0);" class="one_open">
+                    <div class="fill_btn1_smallest"
+                      (click)="commonService.initiateLoginOrAction(rbt, sliderHeading, false, null, true)">
+                      {{'pwa.content.set.button.text' | customTranslate}}
+                    </div>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black ellipse" tyle="vertical-align:top; padding-top:0px">
+                  {{rbt | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Bullet Navigator -->
+      <div data-u="navigator" id="sliderContainer{{Id}}_navigator" class="jssorBulletNavigator{{Id}}"
+        style="position:absolute;bottom:0px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+        <div data-u="prototype" class="i" style="width:12px;height:12px;" [innerHTML]="svgBulletHTML | sanitizeHtml">
+        </div>
+      </div>
+
+    </div>
+    <div class="space_40"></div>
+  </div>
+  <!--Trending Container - WEB Ends-->
+  <!--Subheader - WEB starts-->
+</ng-container>

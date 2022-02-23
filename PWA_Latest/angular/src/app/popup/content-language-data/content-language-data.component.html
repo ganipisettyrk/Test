@@ -1,0 +1,31 @@
+<ng-container *ngIf="langData">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="share_text">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="share_text">{{'pwa.content.language.subheading' | customTranslate}}</td>
+      </tr>
+      <tr>
+        <td class="share_text">
+          <ul class="language_menu">
+            <li *ngFor="let langtem of langData | keyvalue" class="language_menu">
+              <a href="javascript:void(0)" (click)=updateLanguageItem(langtem.value)>
+                <div [class]="langtem.value.selected? 'language_btn select':'language_btn'">
+                  {{langtem.value.displayText}}</div>
+              </a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="share_text center">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pop_confirm_btn"><a href="javascript:void(0)" (click)="updateSelectedContentLanguage()">
+      <div class="fill_btn1 two_close">{{'pwa.content.language.set.button.text' | customTranslate}}</div>
+    </a></div>
+  <div class="space_30"></div>
+</ng-container>

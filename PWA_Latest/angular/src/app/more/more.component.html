@@ -1,0 +1,40 @@
+<ng-container *ngIf="chartId && (type =='chartcontent' || type =='charts' || type =='rtchartcontent')">
+    <app-chart-content [chartId]="chartId" [maxItem]="maxItem" [isLoadMoreRequired]=true [isRTContent]="isRTContent">
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="chartId && type =='profiles'">
+    <app-chart-content [isProfiles]=true [chartId]="chartId" [maxItem]="maxItem" [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="contentIds && albumName && type =='recommendations'">
+    <app-chart-content [isRecommendation]=true [contentIds]="contentIds" [albumName]="albumName" [maxItem]="maxItem"
+        [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="contentIds && albumName && type =='multirecommendations'">
+    <app-chart-content [isMultiRecommendations]=true [contentIds]="contentIds" [albumName]="albumName"
+        [maxItem]="maxItem" [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="type =='recommend'">
+    <app-chart-content [isRecommend]=true [contentIds]="contentIds" [maxItem]="maxItem" [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="searchText && searchGenre">
+    <app-chart-content [isSearchPage]=true [searchText]="searchText" [showBackButton]=true [maxItem]="maxItem"
+        [searchGenre]="searchGenre" [isLoadMoreRequired]=true [isRTContent]="isRTContent">
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="chartId && type =='trending'">
+    <app-chart-content [isTrendingResultsPage]=true [chartId]="chartId" [maxItem]="maxItem" [isLoadMoreRequired]=true
+        [showBackButton]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="chartId && type =='shuffle'">
+    <app-chart-content [isShuffles]=true [chartId]="chartId" [maxItem]="maxItem" [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>
+<ng-container *ngIf="chartId && type =='azan'">
+    <app-chart-content [isAzan]=true [chartId]="chartId" [maxItem]="maxItem" [isLoadMoreRequired]=true>
+    </app-chart-content>
+</ng-container>

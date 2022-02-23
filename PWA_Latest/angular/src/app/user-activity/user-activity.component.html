@@ -1,0 +1,328 @@
+<div class="space_80"></div>
+<!--Trending Container - WEB Ends-->
+<!--Subheader - WEB starts-->
+<div class="inside_heading">{{'pwa.activity.page.heading' | customTranslate}}</div>
+<div class="more_btn_wrap_inside"></div>
+<!--Subheader - WEB ends-->
+<div class="space_5"></div>
+
+<!--Store  Container - WEB Starts-->
+<div class="activity_wrap" id="activity_wrap_1">
+  <div class="activity_left">
+    <ng-container *ngIf="showRTToggle">
+      <div class="float_btn">
+        <app-rt-slider [default]="toggleValue" [isFromActivity]="true">
+        </app-rt-slider>
+      </div>
+      <div class="clear"></div>
+    </ng-container>
+    <ng-container *ngIf="!dataReady">
+      <div class="space_80"></div>
+      <div class="loading_content_wrap">
+        <img src="image/loading_content.gif" width="32" height="32"
+          alt="{{'pwa.loading.image.alt.text' | customTranslate}}" />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="dataReady">
+      <ng-container *ngIf="(!showRTToggle || (showRTToggle && toggleValue == 'ct')) else rtHistory">
+        <div class="home_subheading">{{'pwa.activity.page.subheading1' | customTranslate}}</div>
+        <div class="inside_heading">{{'pwa.activity.page.subheading2' | customTranslate}}</div>
+        <div class="space_20"></div>
+        <div *ngIf="selectionData.length == 0" class="inside_heading">
+          {{'pwa.activity.page.empty.selections.text' | customTranslate}}
+        </div>
+        <ng-container *ngIf="selectionData.length > 0">
+          <div class="set_rock_table1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <ng-container *ngFor="let selection of selectionData; let i = index;">
+                <tr>
+                  <td width="8%" rowspan="2" class="border_bottom"
+                    style="vertical-align:middle; border-bottom: 1px solid #efefef;">
+                    <div class="album_wrap_small1">
+                      <div class="play_container_small"></div>
+                      <app-custom-image-loader *ngIf="selection.contentObj.type != 'ringback_station'"
+                        [actualImgSrc]="selection.contentObj.primary_image" [defaultImgSrc]="defaultImage"
+                        [loadImgSrc]="loadingImage" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                      <div *ngIf="selection.contentObj.type == 'ringback_station'" class="album_placeholder_shuffle">
+                        <app-custom-image-loader [actualImgSrc]="selection.contentObj.primary_image"
+                          [defaultImgSrc]="defaultImage" [loadImgSrc]="loadingImage" [isBannerImage]="false">
+                        </app-custom-image-loader>
+                      </div>
+                      <div *ngIf="selection.contentObj.type == 'ringback_station'" class="album_placeholder_shuffle_bg">
+                        <img src="image/shuffle_bg.png" width="183" height="183"
+                          alt="{{'pwa.image.alt.text' | customTranslate}}">
+                      </div>
+                    </div>
+                  </td>
+                  <td width="61%" rowspan="2" class="txt1" style="border-bottom: 1px solid #efefef;">
+                    <div class="txt1">
+                      {{getText1Details(selection.contentObj)}}
+                    </div>
+                    <div class="txt2">{{getText2Details(selection.contentObj)}}</div>
+                    <div class="txt3">{{getDisplayTextForCaller(selection)}}</div>
+                    <div class="txt4" *ngIf="!selection.isSetForNone">{{setDateText}} {{getSelectionSetDate(selection)}}
+                    </div>
+                  </td>
+                  <td height="58" class="center">
+                    <div class="more_ic">
+                      <a href="javascript:void(0);" (click)="show3DotMenuOptions('active' + i);">
+                        <img src="image/dot_menu.png" width="20" height="20"
+                          alt="{{'pwa.image.alt.text' | customTranslate}}" />
+                      </a>
+                    </div>
+                    <div class="menu_knowmore" id="active3dotsmenu{{i}}" *ngIf="'active' + i == currentIndex">
+                      <div class="menu" *ngIf="!selection.isSetForNone">
+                        <a href="javascript:void(0);" (click)="openDeleteSelectionPopup(selection, i)"
+                          class="one_open">{{'pwa.activity.page.3dots.menu.delete.text' | customTranslate}}</a>
+                      </div>
+                      <div class="menu" *ngIf="selection.isSetForNone">
+                        <a href="javascript:void(0);"
+                          (click)="openLoginOrSetPopup(selection.contentObj, i, selection.isSetForNone)"
+                          class="one_open">{{'pwa.activity.page.3dots.menu.set.text' | customTranslate}}</a>
+                      </div>
+                      <div class="menu" *ngIf="selection.isSetForNone">
+                        <a href="javascript:void(0);" (click)="openDeleteDownloadPopup(selection, i)"
+                          class="one_open">{{'pwa.activity.page.3dots.menu.delete.text' | customTranslate}}</a>
+                      </div>
+                      <div class="menu" style="border-bottom: none;" *ngIf="showShareIn3DotsMenu">
+                        <a href="#">{{'pwa.activity.page.3dots.menu.share.text'| customTranslate}}</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center" style="border-bottom: 1px solid #efefef;">
+                    <div class="activity_toggle" *ngIf="!selection.isSetForNone">
+                      <div class="can-toggle demo-rebrand-2 red" (click)="openDeleteSelectionPopup(selection, i)"
+                        style="margin-top: -25px; display: inline-block; position: absolute; transform: scale(.45, .45);">
+                        <input id="i{{i}}" type="checkbox" checked>
+                        <label for="i{{i}}">
+                          <div class="can-toggle__switch red" data-checked="&nbsp;" data-unchecked="&nbsp;"></div>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="activity_toggle" *ngIf="selection.isSetForNone">
+                      <div class="can-toggle demo-rebrand-2 red disable"
+                        (click)="openLoginOrSetPopup(selection.contentObj, i, selection.isSetForNone)"
+                        style="margin-top: -25px; display: inline-block; position: absolute; transform: scale(.45, .45);">
+                        <input id="i{{i}}" type="checkbox">
+                        <label for="i{{i}}">
+                          <div class="can-toggle__switch red" data-checked="&nbsp;" data-unchecked="&nbsp;"></div>
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+          <div class="clearfix"></div>
+          <div class="space_5"></div>
+          <div class="more_btn" *ngIf="selectionData.length < selectionTotal_Count">
+            <a href="javascript:void(0);"
+              (click)="getActivityDetails(true, false)">{{'pwa.activity.page.seemore.text' | customTranslate}}</a>
+          </div>
+          <ng-container *ngIf="selectionTotal_Count > selectionMaxItems">
+            <div class="more_btn" *ngIf="selectionData.length == selectionTotal_Count">
+              <a href="javascript:void(0);"
+                (click)="getActivityDetails(false, true)">{{'pwa.activity.page.seeless.text' | customTranslate}}</a>
+            </div>
+          </ng-container>
+
+        </ng-container>
+
+        <ng-container *ngIf="historyData.length > 0">
+          <div class="clearfix"></div>
+          <div class="space_40"></div>
+          <div class="home_subheading">{{'pwa.activity.page.history.subheading' | customTranslate}}</div>
+
+          <div class="set_rock_table1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <ng-container *ngFor="let historyItem of historyData; let i = index;">
+                <tr>
+                  <td width="8%" rowspan="2" class="border_bottom"
+                    style="vertical-align:middle; border-bottom: 1px solid #efefef;">
+                    <div class="album_wrap_small1">
+                      <div class="play_container_small"></div>
+                      <app-custom-image-loader [actualImgSrc]="historyItem.primary_image" [defaultImgSrc]="defaultImage"
+                        [loadImgSrc]="loadingImage" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                    </div>
+                  </td>
+                  <td width="61%" rowspan="2" class="txt1" style="border-bottom: 1px solid #efefef;">
+                    <div class="txt1">{{getText1Details(historyItem)}}</div>
+                    <div class="txt2">{{getText2Details(historyItem)}}</div>
+                  </td>
+                  <td height="58" class="center">
+                    <div style="text-align: right;" (click)="show3DotMenuOptions('history' + i);">
+                      <img src="image/dot_menu.png" width="20" height="20"
+                        alt="{{'pwa.image.alt.text' | customTranslate}}" />
+                    </div>
+                    <div class="menu_knowmore" id="deactive3dotsmenu{{i}}" *ngIf="'history' + i == currentIndex">
+                      <div class="menu">
+                        <a (click)="openLoginOrSetPopup(historyItem, i)"
+                          class="one_open">{{'pwa.activity.page.3dots.menu.set.text' | customTranslate}}</a>
+                      </div>
+                      <div class="menu" style="border-bottom: none;" *ngIf="showShareIn3DotsMenu">
+                        <a href="#">{{'pwa.activity.page.3dots.menu.share.text' | customTranslate}}</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center" style="border-bottom: 1px solid #efefef;">
+                    <div class="activity_toggle disable">
+                      <div class="can-toggle demo-rebrand-2 red" (click)="openLoginOrSetPopup(historyItem, i)"
+                        style="margin-top: -25px; display: inline-block; position: absolute; transform: scale(.45, .45);">
+                        <input id="h{{i}}" type="checkbox">
+                        <label for="h{{i}}">
+                          <div class="can-toggle__switch red" data-checked="&nbsp;" data-unchecked="&nbsp;"></div>
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="space_5"></div>
+          <div class="more_btn" *ngIf="historyData.length < historyTotal_Count">
+            <a href="javascript:void(0);"
+            (click)="getHistoryDetails(true, false)">{{'pwa.activity.page.seemore.text' | customTranslate}}</a>
+          </div>
+          <ng-container *ngIf="historyTotal_Count > historyMaxItems">
+            <div class="more_btn" *ngIf="historyData.length == historyTotal_Count">
+              <a href="javascript:void(0);"
+              (click)="getHistoryDetails(false, true)">{{'pwa.activity.page.seeless.text' | customTranslate}}</a>
+            </div>
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+      <ng-template #rtHistory>
+        <div class="space_5"></div>
+        <div *ngIf="rtPurchaseHistoryData.length == 0" class="inside_heading">
+          {{'pwa.activity.page.rt.empty.selections.text' | customTranslate}}
+        </div>
+        <div class="set_rock_table1" *ngIf="rtPurchaseHistoryData.length > 0">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <ng-container *ngFor="let rtContent of rtPurchaseHistoryData; let i = index;">
+              <tr>
+                <td width="8%" rowspan="2" class="border_bottom"
+                  style="vertical-align:middle; border-bottom: 1px solid #efefef;">
+                  <div class="album_wrap_small1">
+                    <div class="play_container_small"></div>
+                    <app-custom-image-loader [actualImgSrc]="rtContent.contentObj.primary_image"
+                      [defaultImgSrc]="defaultImage" [loadImgSrc]="loadingImage" [isBannerImage]="false">
+                    </app-custom-image-loader>
+                  </div>
+                </td>
+                <td width="61%" rowspan="2" class="txt1" style="border-bottom: 1px solid #efefef;">
+                  <div class="txt1"> {{getText1Details(rtContent.contentObj)}} </div>
+                  <div class="txt2"> {{getText2Details(rtContent.contentObj)}} </div>
+                  <div class="txt4">{{purchaseDateText}}{{getRTDate(rtContent)}}</div>
+                </td>
+                <td height="58" class="center">&nbsp;</td>
+              </tr>
+              <tr>
+                <td *ngIf="rtContent.purchase_item_details" class="center" style="border-bottom: 1px solid #efefef;">
+                  <a href="javascript:void(0);" (click)="openLoginOrSetPopupRT(rtContent.contentObj, i)">
+                    <div class="fill_btn1_smallest"
+                      *ngIf="rtContent.purchase_item_details.downloaded_count >= rtContent.purchase_item_details.total_download_count">
+                      {{'pwa.activity.page.rt.get.button.text' | customTranslate}}
+                    </div>
+                    <div class="fill_btn1_smallest"
+                      *ngIf="rtContent.purchase_item_details.downloaded_count < rtContent.purchase_item_details.total_download_count">
+                      {{'pwa.activity.page.rt.redownload.button.text' | customTranslate}}
+                    </div>
+                  </a>
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+          <div class="clearfix"></div>
+          <div class="space_5"></div>
+          <div class="more_btn" *ngIf="rtPurchaseHistoryData.length < rtTotal_Count">
+            <a href="javascript:void(0);"
+            (click)="getRtHistoryData(true, false)">{{'pwa.activity.page.seemore.text' | customTranslate}}</a>
+          </div>
+          <ng-container *ngIf="rtTotal_Count > rtMaxItems">
+            <div class="more_btn" *ngIf="rtPurchaseHistoryData.length == rtTotal_Count">
+              <a href="javascript:void(0);"
+              (click)="getRtHistoryData(false, true)">{{'pwa.activity.page.seeless.text' | customTranslate}}</a>
+            </div>
+          </ng-container>
+
+        </div>
+        <div class="clearfix"></div>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <ng-container
+    *ngIf="dataReady && !isMobile && recommendationData.length > 0 && (!showRTToggle || (showRTToggle && toggleValue == 'ct'))">
+    <div class="activity_right" id="activity_right_1">
+      <div class=" inside_heading">{{'pwa.activity.page.recommendations.heading' | customTranslate}}</div>
+      <div class="more_btn_wrap_inside"></div>
+      <!--Subheader - WEB ends-->
+      <div class="space_5"></div>
+      <!--Store  Container - WEB Starts-->
+      <ul class="album_ContentBlock_List2">
+        <li class="album_ContentBlock_List2" *ngFor="let recItem of recommendationData; let i = index;">
+          <div class="home_small_banner">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td [attr.colspan]="showSetBtn ? 2 : 0" style="text-align:left;">
+                  <div class="album_wrap">
+                    <div class="add_icon">
+                      <div id="{{recItem.preview_stream_url}}" class="play1a"
+                        (click)="commonService.toggleAudioControls(false, 'play1b', 'Activity-recommended-preview', recItem);;">
+                      </div>
+                    </div>
+                    <div class="album_placeholder"
+                      (click)="commonService.goToContentPage(recommendationData, i, recommendationTotal_Count, 'Activity-Recommended-preview', false)">
+                      <app-custom-image-loader [actualImgSrc]="recItem.primary_image" [defaultImgSrc]="defaultImage"
+                        [loadImgSrc]="loadingImage" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black1 ellipse" style="font-weight:normal;">
+                  {{recItem | customEllipse : recItem.type : trackNameSize}}
+                </td>
+                <td *ngIf="showSetBtn" width="28%" rowspan="2" class="" style="font-weight:normal;">
+                  <a href="javascript:void(0);" class="one_open">
+                    <div class="fill_btn1_smallest"
+                      (click)="commonService.initiateLoginOrAction(recItem, 'Activity-Recommended-preview', false, null, true)">
+                      {{'pwa.content.set.button.text' | customTranslate}}
+                    </div>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="big_16_black ellipse" tyle="vertical-align:top; padding-top:0px">
+                  {{recItem | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+      <div class="more_btn" *ngIf="recommendationData.length < recommendationTotal_Count">
+        <a href="javascript:void(0);"
+          (click)="commonService.goToURL('/more/multirecommendations/' + contentIds + '/' + recAlbumName)">
+          {{'pwa.activity.page.seeall.text' | customTranslate}}
+        </a>
+      </div>
+    </div>
+  </ng-container>
+  <!--Store  Container - WEB Ends-->
+  <!--Last TAB - WEB ends-->
+  <div class="clearfix"></div>
+  <div class="space_70"></div>
+</div>

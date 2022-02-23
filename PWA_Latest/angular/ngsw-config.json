@@ -1,0 +1,68 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/image/favicon.ico",
+          "/index.html",
+          "/css/*.css",
+          "/css/font/**",
+          "/scripts/*.js",
+          "/image/**",
+          "/*.js",
+          "/*.webmanifest"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/css/font_ar/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "homepage",
+      "urls": [
+        "/getbanners",
+        "/getdynamicchartitems",
+        "/messagebundle",
+        "/getcontentlanguages",
+        "/getstaticpagedata",
+		"/getdynamicpagedata",
+        "/getchartitems",
+        "/getrecommendations",
+        "/getmulticontentrecommendations",
+        "/getbannercontent"
+      ],
+      "cacheConfig": {
+        "maxSize": 15,
+        "maxAge": "1d",
+        "strategy": "freshness",
+        "timeout": "2s"
+      }
+    },
+    {
+      "name": "PWAImages",
+      "urls": [
+        "/**/streaming/v3/image"
+      ],
+      "cacheConfig": {
+        "maxSize": 40,
+        "maxAge": "1d",
+        "strategy": "freshness",
+        "timeout": "2s"
+      }
+    }
+  ]
+}

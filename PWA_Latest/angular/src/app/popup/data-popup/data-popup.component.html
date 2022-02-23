@@ -1,0 +1,104 @@
+<ng-container *ngIf="type != 'language' && type != 'nametunesearch' && type != 'delete_selection' 
+    && type != 'delete_download' && type != 'unsubscribe'">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td height="10" class="" style="text-align:center;">
+        <div class="done_page_heading" *ngIf="isMobile && !hideHeading">{{heading}}</div>
+
+        <div class="pop_album_wrap">
+          <div class="pop_thankyou_txt" *ngIf="type == 'profile_purchase'" style="text-align: center;">
+            {{'pwa.home.profiles.subheading' | customTranslate}}</div>
+          <div class="space_70" *ngIf="type == 'nametuneCreate'"></div>
+          <ng-container *ngIf="null != item && !hideContentImage && type != 'nametuneCreate'">
+
+            <div class="pop_album_image" *ngIf="item.type != 'ringback_station'">
+              <div class="add_icon">
+                <div id="{{item.preview_stream_url}}$$popup" class="play1a"
+                  (click)="commonService.toggleAudioControls(false, 'play1b', 'Purchase-Popup-Preview', item, null, true);">
+                </div>
+              </div>
+              <img src="{{item.primary_image || defaultImage}}" alt="{{'pwa.image.alt.text' | customTranslate}}"
+                width="183" height="183" />
+            </div>
+
+            <ng-container *ngIf="item.type == 'ringback_station'">
+              <app-ringback-station-content [ringbackStation]="item" [isMobile]="isMobile">
+              </app-ringback-station-content>
+              <div class="pop_artist_name">
+                {{item | customEllipse : item.type : shuffleDisplaySize | shuffleDetails : item.total_item_count}}
+              </div>
+            </ng-container>
+
+            <div class="pop_artist_name" *ngIf="item.type != 'ringback_station'">
+              {{item | customEllipse : item.type : trackNameSize}}
+            </div>
+            <div class="pop_album_name"
+              *ngIf="null != item.subtype && null != item.subtype.type && item.subtype.type != 'ringback_nametune' && item.type != 'ringback_station'">
+              {{item | customEllipse : artistAlbumdisplayType : artistAlbumSize}}
+            </div>
+
+            <div class="tile_player_wrap_pop" *ngIf="!isMobile">
+              <div style="width: 50px; margin-left: auto; margin-right: auto;">
+              </div>
+            </div>
+            <div class="clear"></div>
+            <div class="space_20"></div>
+          </ng-container>
+          <ng-container *ngIf="!isLoggedIn && null == item ">
+            <div class="login_logo_new">
+              <img src="{{'pwa.header.logo.image.path'| customTranslate}}" width="600" height="138"
+                alt="{{'pwa.header.logo.image.alt.text'| customTranslate}}" />
+            </div>
+            <div class="space_20"></div>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="!isLoggedIn || type == 'blockedUser'">
+          <app-login-data [isMobile]=isMobile></app-login-data>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn && type == 'changenumber'">
+          <div class="login_logo_new">
+            <img src="{{'pwa.header.logo.image.path'| customTranslate}}" width="600" height="138"
+              alt="{{'pwa.header.logo.image.alt.text'| customTranslate}}" />
+          </div>
+          <div class="space_20"></div>
+          <app-login-data [isMobile]=isMobile [type]=type></app-login-data>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn  && (initiatePurchase || isConsentFlow || isPaytmFlow)">
+          <app-purchase-data *ngIf="type != 'rt_purchase'" [isMobile]=isMobile [data]=item [shuffleData]=shuffleData
+            [isConsentFlow]=isConsentFlow [isSetForNone]=isSetForNone
+            (selectedProfileItem)="updateProfileContentItem($event)" [isPaytmFlow]=isPaytmFlow>
+          </app-purchase-data>
+          <app-rt-purchase-data *ngIf="type == 'rt_purchase'" [isMobile]=isMobile [data]=item></app-rt-purchase-data>
+        </ng-container>
+      </td>
+    </tr>
+
+    <tr *ngIf="!isMobile">
+      <td align="left">
+      </td>
+    </tr>
+    <tr *ngIf="!isMobile">
+      <td align="left"></td>
+    </tr>
+  </table>
+
+</ng-container>
+
+<ng-container *ngIf="null != item && type=='language'">
+  <app-content-language-data [data]=item></app-content-language-data>
+</ng-container>
+
+<ng-container *ngIf="null != item && type == 'nametunesearch' || (type == 'nametuneCreate' && isLoggedIn) ">
+  <app-nametune-data [data]=item [showCreateNameTuneScreen]=showCreateNameTuneScreen
+    (valueUpdate)="updateDataFromNametune($event)"></app-nametune-data>
+</ng-container>
+
+<ng-container *ngIf="type == 'delete_selection' || type == 'delete_download'">
+  <app-delete-popup-data [selectionItem]=item [type]=type [heading]=heading></app-delete-popup-data>
+</ng-container>
+
+<ng-container *ngIf="type == 'unsubscribe'">
+  <app-unsubscribe-popup [isMobile]="isMobile" [heading]=heading></app-unsubscribe-popup>
+</ng-container>

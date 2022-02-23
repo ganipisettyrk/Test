@@ -1,0 +1,1646 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/assets",
+              "src/image",
+              "src/css",
+              "src/svg",
+              "src/scripts",
+              "src/manifest.webmanifest",
+              "src/clevertap_sw.js"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodafoneIndia": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneIndia/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneIndia/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneIndia/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodafoneIndia/",
+                  "output": "/"
+                },
+                {
+                  "glob": "sitemap.xml",
+                  "input": "./operators/VodafoneIndia/",
+                  "output": "/"
+                },
+                {
+                  "glob": "robots.txt",
+                  "input": "./operators/VodafoneIndia/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodafoneQatar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneQatar/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneQatar/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneQatar/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodafoneQatar/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodafoneComviva": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneComviva/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneComviva/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneComviva/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodafoneComviva/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "OoredoOman": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OoredoOman/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OoredoOman/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OoredoOman/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/OoredoOman/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "IdeaIndia": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/IdeaIndia/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/IdeaIndia/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/IdeaIndia/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/IdeaIndia/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "MTN-Afghanistan": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTN-Afghanistan/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTN-Afghanistan/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTN-Afghanistan/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/MTN-Afghanistan/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VivaBahrain": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VivaBahrain/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VivaBahrain/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VivaBahrain/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VivaBahrain/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "OrangeSpain": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OrangeSpain/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OrangeSpain/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/OrangeSpain/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/OrangeSpain/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "ZainBahrain": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/ZainBahrain/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/ZainBahrain/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/ZainBahrain/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/ZainBahrain/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodafoneSpain": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneSpain/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneSpain/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneSpain/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodafoneSpain/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "TefSpain": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefSpain/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefSpain/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefSpain/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/TefSpain/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "LebaraSaudiArabia": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/LebaraSaudiArabia/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/LebaraSaudiArabia/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/LebaraSaudiArabia/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/LebaraSaudiArabia/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VIL": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VIL/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VIL/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VIL/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VIL/",
+                  "output": "/"
+                },
+                {
+                  "glob": "sitemap.xml",
+                  "input": "./operators/VIL/",
+                  "output": "/"
+                },
+                {
+                  "glob": "robots.txt",
+                  "input": "./operators/VIL/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "MTNDemo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTNDemo/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTNDemo/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/MTNDemo/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/MTNDemo/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodacomMozambique": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomMozambique/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomMozambique/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomMozambique/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodacomMozambique/",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*.html",
+                  "input": "./operators/VodacomMozambique/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+			"VodafoneEgypt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneEgypt/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneEgypt/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodafoneEgypt/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodafoneEgypt/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "Onmobile": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Onmobile/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Onmobile/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Onmobile/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/Onmobile/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "Dialog": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Dialog/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Dialog/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/Dialog/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/Dialog/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "UnitelAngola": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/UnitelAngola/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/UnitelAngola/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/UnitelAngola/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/UnitelAngola/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "TefCostaRica": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefCostaRica/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefCostaRica/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefCostaRica/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/TefCostaRica/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "TefElSalvador": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefElSalvador/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefElSalvador/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/TefElSalvador/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/TefElSalvador/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "DigicelJamaica": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DigicelJamaica/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DigicelJamaica/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DigicelJamaica/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/DigicelJamaica/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "VodacomDRC": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomDRC/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomDRC/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/VodacomDRC/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/VodacomDRC/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "DuDubai": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/svg",
+                "src/scripts",
+                "src/clevertap_sw.js",
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DuDubai/assets/",
+                  "output": "assets/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DuDubai/image/",
+                  "output": "image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "./operators/DuDubai/css/",
+                  "output": "css/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "./operators/DuDubai/",
+                  "output": "/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "150kb",
+                  "maximumError": "200kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodafoneIndia": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodafoneQatar": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodafoneComviva": {
+              "browserTarget": "angular:build:production"
+            },
+            "OoredoOman": {
+              "browserTarget": "angular:build:production"
+            },
+            "IdeaIndia": {
+              "browserTarget": "angular:build:production"
+            },
+            "MTN-Afghanistan": {
+              "browserTarget": "angular:build:production"
+            },
+            "VivaBahrain": {
+              "browserTarget": "angular:build:production"
+            },
+            "OrangeSpain": {
+              "browserTarget": "angular:build:production"
+            },
+            "ZainBahrain": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodafoneSpain": {
+              "browserTarget": "angular:build:production"
+            },
+            "TefSpain": {
+              "browserTarget": "angular:build:production"
+            },
+            "LebaraSaudiArabia": {
+              "browserTarget": "angular:build:production"
+            },
+            "VIL": {
+              "browserTarget": "angular:build:production"
+            },
+            "MTNDemo": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodacomMozambique": {
+              "browserTarget": "angular:build:production"
+            },
+            "Onmobile": {
+              "browserTarget": "angular:build:production"
+            },
+            "Dialog": {
+              "browserTarget": "angular:build:production"
+            },
+            "UnitelAngola": {
+              "browserTarget": "angular:build:production"
+            },
+            "TefCostaRica": {
+              "browserTarget": "angular:build:production"
+            },
+            "TefElSalvador": {
+              "browserTarget": "angular:build:production"
+            },
+            "DigicelJamaica": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodacomDRC": {
+              "browserTarget": "angular:build:production"
+            },
+            "DuDubai": {
+              "browserTarget": "angular:build:production"
+            },
+            "VodafoneEgypt": {
+              "browserTarget": "angular:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/svg",
+              "src/clevertap_sw.js",
+              "src/assets"
+            ],
+            "styles": [],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json",
+              "tsconfig.worker.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodafoneIndia": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodafoneQatar": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodafoneComviva": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "OoredoOman": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "IdeaIndia": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "MTN-Afghanistan": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VivaBahrain": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "OrangeSpain": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "ZainBahrain": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodafoneSpain": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "TefSpain": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "LebaraSaudiArabia": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VIL": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "MTNDemo": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodacomMozambique": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "Onmobile": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "Dialog": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "UnitelAngola": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "TefCostaRica": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "TefElSalvador": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "DigicelJamaica": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "VodacomDRC": {
+              "devServerTarget": "angular:serve:production"
+            },
+            "DuDubai": {
+              "devServerTarget": "angular:serve:production"
+            },
+			"VodafoneEgypt": {
+              "devServerTarget": "angular:serve:production"
+            }
+
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular"
+}

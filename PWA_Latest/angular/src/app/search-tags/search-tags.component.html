@@ -1,0 +1,26 @@
+<div *ngIf="searchTags && searchTags.length > 0">
+    <div class="space_80"></div>
+    <div class="trending_wrap" id="trending_wrap_searchtags">
+        <div class="inside_heading">{{searchTagsHeading}}</div>
+        <div class="more_btn_wrap_inside"></div>
+        <ng-container *ngIf="showRTToggle">
+            <div class="float_btn">
+                <app-rt-slider [default]="selectedContent" [isFromSearch]="true">
+                </app-rt-slider>
+            </div>
+            <div class="clear"></div>
+            <div class="space_20"></div>
+        </ng-container>
+        <!--Tag selection Container Starts-->
+        <div class="search_selection_menu_wrap">
+            <div class="search_select_main_menu">
+                <ng-container *ngFor="let tag of searchTags">
+                    <a href="javascript:void(0);" (click)="redirectToCategoryURL(tag.chartId, tag.tagName)">
+                        <div class="outline_btn_red">{{tag.tagName}}</div>
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+        <!--Tag selection Container Ends-->
+    </div>
+</div>

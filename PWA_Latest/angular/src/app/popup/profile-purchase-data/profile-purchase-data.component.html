@@ -1,0 +1,54 @@
+<div class="pop_small_txt">{{'pwa.profiles.select.gender.days.lang.text' | customTranslate}}</div>
+
+<div class="space_20"></div>
+<div style="width:100%; margin-left: auto; margin-right: auto;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+
+        <td style="text-align:center; font-size: 12px; padding-bottom: 8px; color: #000;">
+          {{'pwa.profiles.gender.text' | customTranslate}}</td>
+        <td style="text-align:center; font-size: 12px; padding-bottom: 8px; color: #000;">
+          {{'pwa.profiles.duration.text' | customTranslate}}</td>
+        <td style="text-align:center; font-size: 12px; padding-bottom: 8px; color: #000;">
+          {{'pwa.profiles.language.text' | customTranslate}}</td>
+
+      </tr>
+      <tr>
+        <td width="30%" style="text-align:center;">
+          <input type="text" class="select_box_option_gender"
+            value="{{'pwa.profiles.gender.female.text' | customTranslate}}" readonly>
+        </td>
+        <td width="40%" style="text-align:center;">
+          <select name="Time=3" packs="packs" class="select_box_option_tiny" (change)="onDaysSelect($event)">
+            <option *ngFor="let day of days; let i = index;" value="{{day}}" [attr.selected]="i == 0 ? true : null">
+              {{day}}{{'pwa.profiles.days.text' | customTranslate}}</option>
+          </select>
+          <select name="Time=" packs="packs" class="select_box_option_tiny" (change)="onHoursSelect($event)">
+            <option *ngFor="let hour of hours; let i = index;" value="{{hour}}" [attr.selected]="i == 1 ? true : null">
+              {{hour}}{{'pwa.profiles.hours.text' | customTranslate}}</option>
+          </select>
+          <select name="Time=2" packs="packs" class="select_box_option_tiny" (change)="onMinsSelect($event)">
+            <option *ngFor="let min of minutes; let i = index;" value="{{min}}" [attr.selected]="i == 0 ? true : null">
+              {{min}}{{'pwa.profiles.minutes.text' | customTranslate}}</option>
+          </select>
+        </td>
+        <td width="30%" style="text-align:center;">
+          <select name="Time=3" packs="packs" class="select_box_option" (change)="onLanguageSelect($event)">
+            <option selected="selected" value="{{firstProfileItemLang}}">{{firstProfileItemLang}}</option>
+            <option *ngFor="let language of profileItemLangDisplayList | slice: 1" value="{{language}}">{{language}}
+            </option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="showProfileDurationError">
+    <div class="error_message">{{'pwa.error.invalid.profile.duration' | customTranslate}}</div>
+  </div>
+</div>
+<div class="space_40"></div>
+<div class="pop_big_txt">{{'pwa.proifles.all.callers.text' | customTranslate}}</div>
+<div class="space_20"></div>
+<div class="pop_small_txt"><strong>{{profilePrice}}</strong></div>
+<div class="space_40"></div>

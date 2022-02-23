@@ -1,0 +1,53 @@
+<!--Charts Slider start-->
+<div class="slider_content_profile_wrap" *ngIf="subcharts">
+
+  <div class="space_40"></div>
+  <div class="home_heading"><h1>{{chartSliderHeading}}</h1></div>
+  <div class="home_subheading"><h2>{{chartSliderSubheading}}</h2></div>
+  <div class="more_btn_wrap">
+    <div class="more_btn" *ngIf="showMore">
+      <a href="javascript:void(0)" (click)="commonService.goToURL(getMoreButtonUrl());">{{moreButtonText}}</a>
+    </div>
+  </div>
+
+  <div class="slider_content_profile">
+    <div class="clearfix"></div>
+    <div class="space_30"></div>
+    <div id="sliderContainer7"
+      style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px; height:230px;overflow:hidden;visibility:hidden; ">
+      <div u="slides" id="slides_sliderContainer7"
+        style="cursor:default;position:relative;top:0px;left:0px;width:996px;height:230px;overflow:hidden;">
+        <div *ngFor="let chart of subcharts;trackBy:commonService.trackById; let i=index;let isLast=last;"
+          appCustomJssor isLast={{isLast}} sliderId="7">
+          <div class="home_profile_banner" id="home_profile_banner_{{i}}">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="text-align:left;">
+                  <div class="album_wrap">
+                    <div class="album_placeholder_cat"
+                      (click)="commonService.goToURL(commonService.getChartContentUrl(chart))">
+                      <app-custom-image-loader [actualImgSrc]="chart.primary_image"
+                        [defaultImgSrc]="chartSliderImageDefault" [loadImgSrc]="chartSliderImageLoading"
+                        [showImage]="imageItemsMap.get(i)" [isBannerImage]="false">
+                      </app-custom-image-loader>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bullet Navigator -->
+      <div data-u="navigator" id="sliderContainer7_navigator" class="jssorBulletNavigator3"
+        style="position:absolute;bottom:0px;right:12px;" data-autocenter="1" data-scale="0.1" data-scale-bottom="0.75">
+        <div data-u="prototype" class="i" style="width:14px;height:14px;" [innerHTML]="svgBulletHTML | sanitizeHtml">
+        </div>
+      </div>
+      <!-- end Basic jQuery Slider -->
+    </div>
+  </div>
+  <div class="space_40"></div>
+</div>
+<!--Charts Slider End-->

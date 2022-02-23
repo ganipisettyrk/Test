@@ -1,0 +1,51 @@
+<!--Container Starts -->
+<app-toaster-message></app-toaster-message>
+<ng-template #vcrPopup> </ng-template>
+<!-- Landscape Block-->
+<div id="new_overlay" style="height:2000px;"></div>
+<div id="landscape" style="z-index:999999; position:fixed;">
+  <div style="text-align:center; top:30px;">
+    <img src="image/orientation.png" alt="{{'pwa.image.alt.text' | customTranslate}}" width="200" height="200"
+      class="orient_img" />
+  </div>
+  <div class="orient_txt">{{'pwa.landscape.block.text' | customTranslate}}</div>
+</div>
+<div class="container">
+  <ng-container *ngIf="poweredByText && hideLoading != null && !hideLoading">
+    <div class="loading_wrap">
+      <div class="loading_logo_wrap">
+        <div class="logo_space rotatingeffect">
+          <img src="image/loading_logo.png" width="633" height="633"
+            alt="{{'pwa.loading.image.alt.text' | customTranslate}}" />
+        </div>
+        <div class="logo_txt"><img src="image/logo_txt.png" width="231" height="98"
+            alt="{{'pwa.image.alt.text' | customTranslate}}" /></div>
+      </div>
+      <div style="text-align: center;color: #fff; font-family: 'Roboto-Medium'; font-size: 16px; font-weight: bolder;">
+        {{yourFavSongText}}
+      </div>
+      <div class="splash_wrap">
+        <div class="splash_logo"><img src="image/logo.svg" alt="{{'pwa.image.alt.text' | customTranslate}}" /></div>
+        <div class="splash_loading_img">
+          <div class="loading_bg">
+            <div class="loading"></div>
+          </div>
+        </div>
+        <div class="splash_loading_txt">{{poweredByText}}</div>
+      </div>
+    </div>
+  </ng-container>
+  <app-header [hideBrowsingLanguage]="hideBrowsingLanguage"></app-header>
+  <main>
+    <ng-container *ngIf="showBanner && bannerGroup && isLanguagesUpdated">
+      <app-banner [bannerGroup]="bannerGroup" (valueNotExists)="updateBannerView($event)"
+        [defaultImageSize]="bannerDefaultImageSize" [isMobile]="deviceService.isMobile()" [isRTContent]="isRTContent">
+      </app-banner>
+      <div class="space_100"></div>
+    </ng-container>
+    <router-outlet></router-outlet>
+  </main>
+  <ng-template #vcrFooter> </ng-template>
+  <!-- <app-footer *ngIf="showFooter"></app-footer> -->
+</div>
+<!--Container Ends-->

@@ -1,0 +1,24 @@
+<ng-container *ngIf="isInitialLoadingCompleted">
+    <!--Toggle button starts-->
+    <div>
+        <button class="btn btn--slider">
+            <span [class]="default=='ct'? 'btn--slider__choice active': 'btn--slider__choice'" (click)="goToPage('ct')">
+                {{ctText}}
+            </span>
+            <span [class]="default=='rt'? 'btn--slider__choice active': 'btn--slider__choice'" (click)="goToPage('rt')">
+                {{rtText}}
+            </span>
+            <ng-container *ngIf="isFromActivity">
+                <span class="btn--slider__toggler" [style.width]="default=='ct'? '102px' : '102px'"
+                    [style.left]="default=='ct'? '4px' : '99px'"></span>
+            </ng-container>
+            <ng-container *ngIf="!isFromActivity">
+                <span class="btn--slider__toggler" [style.width]="default=='ct'? '102px' : '91px'"
+                    [style.left]="default=='ct'? '4px' : '109px'"></span>
+            </ng-container>
+
+        </button>
+    </div>
+    <div class="space_10"></div>
+    <!--Toggle button Ends-->
+</ng-container>
