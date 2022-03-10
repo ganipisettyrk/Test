@@ -68,8 +68,6 @@ task build{}
 build.dependsOn(npm_install)
 build.dependsOn(npm_run_build)
 
-npm run test-karma
-
 def populateOperators(operatorInputValue) {
 println "operator "+operatorInputValue
 //Based on commandline operator value this list will be built
