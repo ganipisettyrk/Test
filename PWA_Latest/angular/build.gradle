@@ -67,6 +67,7 @@ task build{}
 
 build.dependsOn(npm_install)
 build.dependsOn(npm_run_build)
+build.dependsOn(npm_run_test-karma)
 
 def populateOperators(operatorInputValue) {
 println "operator "+operatorInputValue
