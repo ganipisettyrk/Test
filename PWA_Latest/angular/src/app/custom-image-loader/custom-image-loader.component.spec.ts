@@ -22,4 +22,13 @@ describe('CustomImageLoaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it ('should return true, if showImage is null', () => {
+    let showImage = null;
+    if (showImage == null) {
+      expect(showImage).toBeTruthy;
+    } else {
+      expect(showImage).toBeFalsy;
+    }
+  });
 });
