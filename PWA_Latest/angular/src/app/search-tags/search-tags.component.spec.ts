@@ -3,7 +3,7 @@ import { HttpRequestService } from '../utils/http-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchTagsComponent } from './search-tags.component';
 import { SearchTagsService } from './search-tags.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 describe('SearchTagsComponent', () => {
@@ -12,6 +12,7 @@ describe('SearchTagsComponent', () => {
   let service: SearchTagsService;
   let spy: any;
   let router: Router;
+  let httpHandler: HttpHandler;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,7 +23,7 @@ describe('SearchTagsComponent', () => {
   }));
 
   beforeEach(() => {
-    service = new SearchTagsService(new HttpRequestService(new HttpClient));
+    service = new SearchTagsService(new HttpRequestService(new HttpClient(httpHandler)));
     fixture = TestBed.createComponent(SearchTagsComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
@@ -36,12 +37,12 @@ describe('SearchTagsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
-
   describe('Method: showTrendingSearchTags', () => {
     it('should call the `getTrendingSearchTags` method in `SearchTagsService`', () => {
       spy = spyOn(service, 'getTrendingSearchTags');
-      component.showTrendingSearchTags();
+      component.showTrendingSearchTags('en');
       expect(spy).toHaveBeenCalled();
     });
   });
@@ -53,5 +54,5 @@ describe('SearchTagsComponent', () => {
       expect(navigetSpy).toHaveBeenCalledWith(['/more/trending/100']);
     });
   });
-  
+
 });
