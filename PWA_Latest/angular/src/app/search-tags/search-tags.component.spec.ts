@@ -10,7 +10,7 @@ describe('SearchTagsComponent', () => {
   let component: SearchTagsComponent;
   let fixture: ComponentFixture<SearchTagsComponent>;
   // let service: SearchTagsService;
-  let searchTagsServiceSpy = jasmine.createSpyObj('SearchTagsService', 'getTrendingSearchTags');
+  let searchTagsServiceSpy = jasmine.createSpyObj( {getTrendingSearchTags: null});
   
   // let spy: any;
   let router: Router;
@@ -70,5 +70,5 @@ describe('SearchTagsComponent', () => {
     component.redirectToCategoryURL('100', 'dummyCategory');
     expect(navigetSpy).toHaveBeenCalledWith(['/more/trending/100']);
   });
-  
+
 });
