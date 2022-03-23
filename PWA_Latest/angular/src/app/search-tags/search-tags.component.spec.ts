@@ -19,7 +19,7 @@ describe('SearchTagsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchTagsComponent ],
-      imports: [RouterTestingModule.withRoutes('/more/trending/**')],
+      imports: [RouterTestingModule.withRoutes([])],
       providers: [
         { provide: SearchTagsService, useValue: searchTagsServiceSpy }
       ]
@@ -66,9 +66,9 @@ describe('SearchTagsComponent', () => {
   // });
 
   it('#redirectToCategoryURL should navigate to respective categoy url', () => {
-    const navigetSpy = spyOn(router, 'redirectToCategoryURL');
+    const navigateSpy = spyOn(router, 'navigate');
     component.redirectToCategoryURL('100', 'dummyCategory');
-    expect(navigetSpy).toHaveBeenCalledWith(['/more/trending/100']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/more/trending/100']);
   });
 
 });
