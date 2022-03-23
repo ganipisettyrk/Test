@@ -19,7 +19,7 @@ describe('SearchTagsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchTagsComponent ],
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule.withRoutes('/more/trending/**')],
       providers: [
         { provide: SearchTagsService, useValue: searchTagsServiceSpy }
       ]
@@ -29,9 +29,9 @@ describe('SearchTagsComponent', () => {
 
   beforeEach(() => {
     // service = new SearchTagsService(new HttpRequestService(new HttpClient(httpHandler)));
+    router = TestBed.get(Router);
     fixture = TestBed.createComponent(SearchTagsComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -65,8 +65,8 @@ describe('SearchTagsComponent', () => {
   //   });
   // });
 
-  it('should navigate to searchTag url', () => {
-    const navigetSpy = spyOn(router, 'navigate');
+  it('#redirectToCategoryURL should navigate to respective categoy url', () => {
+    const navigetSpy = spyOn(router, 'redirectToCategoryURL');
     component.redirectToCategoryURL('100', 'dummyCategory');
     expect(navigetSpy).toHaveBeenCalledWith(['/more/trending/100']);
   });
