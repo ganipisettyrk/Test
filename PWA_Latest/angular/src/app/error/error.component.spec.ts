@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonService } from '../utils/common.service';
 
 import { ErrorComponent } from './error.component';
 
@@ -22,4 +23,9 @@ describe('ErrorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('retrieves error description', waitForAsync(inject([CommonService], (commonService) => {
+    commonService.getGenericErrorDescription().subscribe(result => expect(result).not.toBeNull());
+    done();
+  })));
 });
